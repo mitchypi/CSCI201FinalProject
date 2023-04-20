@@ -9,7 +9,7 @@ import java.sql.SQLException;
 	        
 	    
 
-		public static void insertRegistration(String username, String password, String email, double balance) {
+		public static boolean insertRegistration(String username, String password, String email, double balance) {
 			try {
 				Class.forName("com.mysql.cj.jdbc.Driver");
 			} catch (ClassNotFoundException e) {
@@ -21,7 +21,7 @@ import java.sql.SQLException;
 		    ResultSet rs = null;
 		    try {
 		    	
-		        conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/a4", "root", "wasdwasd");
+		        conn = DriverManager.getConnection("jdbc:mysql://placeholder", "root", "password");
 
 		        // check if a row with the same username or email already exists
 		        String checkSql = "SELECT * FROM users WHERE username = ? OR email = ?";
@@ -31,7 +31,7 @@ import java.sql.SQLException;
 		        rs = pstmt.executeQuery();
 		        if (rs.next()) {
 		            System.out.println("A user with the same username or email already exists.");
-		            return;
+		            return false;
 		        }
 
 		        // insert a new row
@@ -61,6 +61,7 @@ import java.sql.SQLException;
 		            sqle.printStackTrace();
 		        }
 		    }
+		    return true;
 		}
 
 	    public static boolean login(String username, String password) throws SQLException{
@@ -70,7 +71,7 @@ import java.sql.SQLException;
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-	        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/a4", "root", "wasdwasd");
+	        Connection conn = DriverManager.getConnection("jdbc:mysql://placeholder", "root", "password");
 	        ResultSet rs = null;
 	        boolean isValid = false;
 	        PreparedStatement stmt = conn.prepareStatement("SELECT * FROM users WHERE username=? AND password=?");
