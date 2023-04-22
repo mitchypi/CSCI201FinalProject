@@ -3,6 +3,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 	public class JDBCConnector {
 	        
@@ -86,4 +87,50 @@ import java.sql.SQLException;
 	        return isValid;
 
 	    }
+
+		public static ArrayList<Restaurant> getRestaurants(){
+			ArrayList <Restaurant> restaurants = new ArrayList<Restaurant>();
+			try {
+				Class.forName("com.mysql.cj.jdbc.Driver");
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			Connection conn = null;
+		    PreparedStatement pstmt = null;
+		    ResultSet rs = null;
+			try{
+				conn = DriverManager.getConnection("jdbc:mysql://placeholder", "root", "password");
+				String sql = "SELECT * FROM restaurants";
+				pstmt = conn.prepareStatement(sql);
+				rs = pstmt.executeQuery();
+				while(rs.next()){
+					Restaurant r = new Restaurant(rs.getInt("id"), rs.getString("name"), rs.getString("address"), rs.getString("imgurl"));
+					restaurants.add(r);
+				}
+				
+				
+			}
+			catch (SQLException sqle) {
+		        System.out.println("SQLException in insertRegistration: ");
+		        sqle.printStackTrace();
+		    } finally {
+		        try {
+		            if (rs != null) {
+		                rs.close();
+		            }
+		            if (pstmt != null) {
+		                pstmt.close();
+		            }
+		            if (conn != null) {
+		                conn.close();
+		            }
+		        } catch (SQLException sqle) {
+		            System.out.println("SQLException in insertRegistration: ");
+		            sqle.printStackTrace();
+		        }
+		    }
+			return restaurants;
+
+		}
 }
