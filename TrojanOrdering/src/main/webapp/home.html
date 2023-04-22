@@ -88,8 +88,9 @@
     	font-size: 20px;
     	}
 </style>
+<script src="home.js"></script>
 </head>
-<body>
+<body onload="grabRestaurants()">
   <div class="nav">
     <ul>
       <li><a href="login.html">LOGIN</a></li>
@@ -99,27 +100,10 @@
     </ul>
   </div>
   <h1>Home</h1>
+  
   <div id = "main">
-   	<div class = "row">
-   		<a class = "container" href = "restauarants.html..."> <!--redirect to restaurants page for specified restaurant-->
-   			<img src = "https://www.coldstonecreamery.com/assets/img/products/signaturecreations/dontcryoverspilledsilk.jpg">
-   			<div class = "caption">Coldstone</div>
-   		</a>
-   		<a class = "container" href = "restauarants.html...">
-   			<img src = "https://www.in-n-out.com/ino-images/default-source/default-album/og-hero.jpg">
-   			<div class = "caption">In-N-Out</div>
-   		</a>
-   	</div>
-   	<div class = "row">
-   		<a class = "container" href = "restauarants.html...">
-   			<img src = "https://www.coldstonecreamery.com/assets/img/products/signaturecreations/dontcryoverspilledsilk.jpg">
-   			<div class = "caption">etc</div>
-   		</a>
-   		<a class = "container" href = "restauarants.html...">
-   			<img src = "https://www.coldstonecreamery.com/assets/img/products/signaturecreations/dontcryoverspilledsilk.jpg">
-   			<div class = "caption">etc</div>
-   		</a>
-   	</div>
+  	<div id = "restaurants"></div>
+   </div>
   
    	
   </div>
