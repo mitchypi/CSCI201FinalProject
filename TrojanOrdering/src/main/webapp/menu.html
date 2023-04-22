@@ -3,9 +3,58 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href="theme.css">
+<link rel="stylesheet" href="menu.css"/>
+<script type="text/javascript">
+ 	function mu(e){
+ 		<!-- Should popup a window to add to order -->
+ 	}
+ 
+</script>
+
+<!-- This html is supposed to be the destination from the restaurant clicked in the home page, so I guess it is homeServlet should grab data and compose this page -->
+<!-- Here is just a sample static menu-->
+
 </head>
 <body>
-Get menu from the backend for a particular restaurant that the user selects
+
+	<div id="div1">
+	<label id="headName">In-N-Out</label><br>
+	<div id="ii"></div>
+	<!--  Image here is just a sample  -->
+	<img id="image" src="https://media.istockphoto.com/id/1457889029/photo/group-of-food-with-high-content-of-dietary-fiber-arranged-side-by-side.jpg?s=1024x1024&w=is&k=20&c=96MkVCuqUWOcMZ7vO5nG41rPufiSWlayTac_nsxXUTw="></img><br>
+	<form id="form1">
+		<table>
+		<tbody>
+		<tr>
+		<th><label id="name">Double-Double</label></th>
+		<th><label id="price">$3.95</label></th>
+		<th><input id="button" type="submit" value="Add to Order" onclick="mu(this)"></input></th>
+		</tr>
+		</tbody>
+		</table>
+	</form><br>
+	<form id="form2">
+		<table>
+		<tbody>
+		<tr>
+		<th><label id="name">Cheeseburger</label></th>
+		<th><label id="price">$2.80</label></th>
+		<th><input id="button" type="submit" value="Add to Order" onclick="mu(this)"></input></th>
+		</tr>
+		</tbody>
+		</table>
+	</form><br>
+	<form id="form3">
+		<table>
+		<tbody>
+		<tr>
+		<th><label id="name">French-Fries</label></th>
+		<th><label id="price">$1.85</label></th>
+		<th><input id="button" type="submit" value="Add to Order" onclick="mu(this)"></input></th>
+		</tr>
+		</tbody>
+		</table>
+	</form><br>
+	</div>
 </body>
 </html>

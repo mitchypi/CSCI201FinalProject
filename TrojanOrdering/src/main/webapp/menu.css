@@ -1,0 +1,41 @@
+@charset "UTF-8";
+
+#name{
+	display: inline;
+	float: left;
+	margin-left: 35%;
+	width: 120px;
+}
+
+#price{
+	display: inline;
+	float: center;
+}
+
+table{
+	width:45%;
+	margin: auto;
+}
+
+#button{
+	display: inline;
+	float: right;
+	margin-right: 35%;
+}
+
+#image{
+	max-height:300px;
+	padding: 30px;
+}
+
+#headName{
+	padding: 30px;
+}
+
+#div1{
+	text-align: center;
+}
+
+form{
+	display: block;
+}
