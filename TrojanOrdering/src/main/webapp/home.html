@@ -2,10 +2,133 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Home</title>
 <link rel="stylesheet" type="text/css" href="theme.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Racing+Sans+One&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inconsolata&display=swap"
+      rel="stylesheet"
+    />
+<style>
+
+      body {
+        background-color: #F3EFE5;
+        display: flex;
+        flex-direction: column;
+      }
+      
+      h1 {
+        font-family: "Racing Sans One", sans-serif;
+        font-size: 70px;
+        color: #B51717;
+        text-align: center;
+        margin: 0;
+        padding: 0;
+      }
+      
+      li {
+        float: left;
+      }
+      
+      li a {
+        display: block;
+        padding: 8px;
+        color: black;
+        font-family: Inconsolata, monospace;
+      }
+      
+      a {
+      text-decoration:none;      
+      }
+      
+      ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+      }
+      form {
+        font-family: Inconsolata, monospace;
+      }
+      
+      .row {
+      	display:flex;
+      }
+       #main{
+    	margin-top: 10px;
+    	margin-left:auto;
+    	margin-right:auto;
+    	width:1100px;
+    	
+    	}
+       .container{
+    	margin: 10px;
+    	width: 530px; /*(1100-40)/2*/
+    	height: 400px;
+    	overflow:hidden;
+    	position: relative;
+    	flex-direction: column;
+    	border-style:solid;
+    	}
+    	
+    	.container > img{
+    	width:530px;
+    	height: 360px;
+    	object-fit: cover;
+    	}
+    	
+    	.caption{
+    	text-align:center;
+    	font-size: 20px;
+    	}
+</style>
 </head>
 <body>
-
+  <div class="nav">
+    <ul>
+      <li><a href="login.html">LOGIN</a></li>
+      <li><a href="home.html">HOME</a></li>
+      <li><a href="restaurants.html">RESTAURANTS</a></li>
+      <li><a href="checkout.html">CHECKOUT</a></li>
+    </ul>
+  </div>
+  <h1>Home</h1>
+  <div id = "main">
+   	<div class = "row">
+   		<a class = "container" href = "restauarants.html..."> <!--redirect to restaurants page for specified restaurant-->
+   			<img src = "https://www.coldstonecreamery.com/assets/img/products/signaturecreations/dontcryoverspilledsilk.jpg">
+   			<div class = "caption">Coldstone</div>
+   		</a>
+   		<div class = "container">
+   			<img src = "https://www.in-n-out.com/ino-images/default-source/default-album/og-hero.jpg">
+   			<div class = "caption">In-N-Out</div>
+   		</div>
+   	</div>
+   	<div class = "row">
+   		<div class = "container">
+   			<img src = "https://www.coldstonecreamery.com/assets/img/products/signaturecreations/dontcryoverspilledsilk.jpg">
+   			<div class = "caption">etc</div>
+   		</div>
+   		<div class = "container">
+   			<img src = "https://www.coldstonecreamery.com/assets/img/products/signaturecreations/dontcryoverspilledsilk.jpg">
+   			<div class = "caption">etc</div>
+   		</div>
+   	</div>
+   	<div class = "row">
+   		<div class = "container">
+   			<img src = "https://www.coldstonecreamery.com/assets/img/products/signaturecreations/dontcryoverspilledsilk.jpg">
+   			<div class = "caption">etc</div>
+   		</div>
+   		<div class = "container">
+   			<img src = "https://www.coldstonecreamery.com/assets/img/products/signaturecreations/dontcryoverspilledsilk.jpg">
+   			<div class = "caption">etc</div>
+   		</div>
+   	</div>
+   	
+  </div>
 </body>
 </html>
