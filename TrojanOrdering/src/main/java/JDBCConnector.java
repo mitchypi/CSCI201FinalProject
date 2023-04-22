@@ -1,8 +1,4 @@
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 
 	public class JDBCConnector {
@@ -100,19 +96,19 @@ import java.util.ArrayList;
 		    PreparedStatement pstmt = null;
 		    ResultSet rs = null;
 			try{
-				conn = DriverManager.getConnection("jdbc:mysql://placeholder", "root", "password");
-				String sql = "SELECT * FROM restaurants";
+				conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/TrojanOrdering", "root", "wasdwasd");
+				String sql = "SELECT * FROM Restaurants";
 				pstmt = conn.prepareStatement(sql);
 				rs = pstmt.executeQuery();
 				while(rs.next()){
-					Restaurant r = new Restaurant(rs.getInt("id"), rs.getString("name"), rs.getString("address"), rs.getString("imgurl"));
+					Restaurant r = new Restaurant(rs.getInt("restaurant_id"), rs.getString("name"), rs.getString("address"), rs.getString("imgurl"));
 					restaurants.add(r);
 				}
 				
 				
 			}
 			catch (SQLException sqle) {
-		        System.out.println("SQLException in insertRegistration: ");
+		        System.out.println("SQLException in getRest: ");
 		        sqle.printStackTrace();
 		    } finally {
 		        try {
@@ -126,7 +122,7 @@ import java.util.ArrayList;
 		                conn.close();
 		            }
 		        } catch (SQLException sqle) {
-		            System.out.println("SQLException in insertRegistration: ");
+		            System.out.println("SQLException in getRest: ");
 		            sqle.printStackTrace();
 		        }
 		    }
