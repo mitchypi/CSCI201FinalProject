@@ -57,7 +57,17 @@ public class CheckoutServlet extends HttpServlet {
 	}
 	
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		int user_id = Integer.parseInt(req.getParameter("userID"));
+		PrintWriter out = resp.getWriter();
+		String json = "{\"data\":[";
 		
+		ArrayList<Integer> itemNumbers = JDBCConnector.getCartItems(user_id);
+		json += JDBCConnector.getItemData(itemNumbers);
+		json += json += "]}";
+		
+		out.println(json);
+		out.flush();
+		out.close();
 	}
 	
 	protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

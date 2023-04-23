@@ -47,6 +47,52 @@ import java.util.ArrayList;
 	    	// Execute the statement
 	    	stmt.executeQuery();
 		}
+		
+		public static ArrayList<Integer> getCartItems(int user_id){
+			ArrayList<Integer> result = new ArrayList<Integer>();
+			int number = 0;
+			
+			Connection conn = DriverManager.getConnection("jdbc:mysql://placeholder", "root", "password");
+			PreparedStatement stmt = conn.prepareStatement("SELECT * FROM carts WHERE userID=?");
+			stmt.setInt(1, user_id);
+			ResultSet rs = null;
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				number = rs.getInt("balance");
+				result.add(number);
+			}
+			
+			return result;
+		}
+		
+		public static String getItemData(ArrayList<Integer> numbers) {
+			String result = "";
+			Connection conn = DriverManager.getConnection("jdbc:mysql://placeholder", "root", "password");
+			
+			for(int i = 0; i < numbers.size(); i++) {
+				PreparedStatement stmt = conn.prepareStatement("SELECT * FROM items WHERE itemID=?");
+				stmt.setInt(1, numbers.get(i));
+				ResultSet rs = null;
+				rs = ps.executeQuery();
+				
+				rs.first();
+				String name = rs.getString("name");
+				double price = rs.getDouble("price");
+				String desc = rs.getString("description");
+				
+				result += "{\"name\":" + "\"" + name + "\",";
+				result += "\"description\":" + "\"" + desc + "\",");
+				result += "\"price\":" +  price + "}");
+				if(i != numbers.size()-1) {
+					result += ",";
+				}
+				
+				stmt.close();
+				rs.close();
+			}
+			return result;
+		}
 
 		public static boolean insertRegistration(String username, String password, String email, double balance) {
 			try {
