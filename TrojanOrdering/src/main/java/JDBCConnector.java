@@ -3,7 +3,50 @@ import java.util.ArrayList;
 
 	public class JDBCConnector {
 	        
-	    
+		public static void deleteCartItems(int user_id) throws SQLException {
+			Connection conn = DriverManager.getConnection("jdbc:mysql://placeholder", "root", "password");
+			PreparedStatement pstmt = conn.prepareStatement("DELETE * FROM carts WHERE user_id=?");
+	    	pstmt.setInt(1, user_id);
+	    	pstmt.executeQuery();
+	    	pstmt.close();
+		}
+		
+		public int getBalance(int user_id) throws SQLException {
+			int result = -1;
+			Connection conn = DriverManager.getConnection("jdbc:mysql://placeholder", "root", "password");
+			PreparedStatement ps = conn.prepareStatement("SELECT balance from users WHERE userID=?");
+			ps.setInt(1, user_id);
+
+		    ResultSet rs = ps.executeQuery();
+		    if (rs.next()) {
+		        result = rs.getInt("balance");
+		    }
+			return result;
+		}
+		
+		public boolean updateBalance(int user_id, int balance, int total) throws SQLException {
+			balance = balance - total;
+			Connection conn = DriverManager.getConnection("jdbc:mysql://placeholder", "root", "password");
+	    	PreparedStatement stmt = conn.prepareStatement("UPDATE users SET balance = ? WHERE user_id = ?");
+	    	stmt.setInt(1, balance);
+	    	stmt.setInt(2, user_id);
+	    	// Execute the update statement
+	    	int rowsUpdated = stmt.executeUpdate();
+	    	if (rowsUpdated > 0) {
+	    		stmt.close();
+	    		return true;
+	    	}
+	    	return false;
+		}
+		
+		public static void deleteCartItems(int user_id, Stirng itemName) {
+			Connection conn = DriverManager.getConnection("jdbc:mysql://placeholder", "root", "password");
+			PreparedStatement stmt = conn.prepareStatement("DELETE FROM carts WHERE user_id = ? AND item_id = (SELECT item_id FROM items WHERE item_name = ?)");
+			stmt.setInt(1, user_id);
+	    	stmt.setString(2, itemName);
+	    	// Execute the statement
+	    	stmt.executeQuery();
+		}
 
 		public static boolean insertRegistration(String username, String password, String email, double balance) {
 			try {
