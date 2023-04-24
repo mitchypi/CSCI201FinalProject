@@ -27,7 +27,7 @@ import java.util.ArrayList;
 	    	return false;
 		}
 		
-		public static void deleteCartItems(int user_id, Stirng itemName) {
+		public static void deleteCartItems(int user_id, String itemName) throws SQLException {
 			Connection conn = DriverManager.getConnection("jdbc:mysql://placeholder", "root", "password");
 			PreparedStatement stmt = conn.prepareStatement("DELETE FROM carts WHERE user_id = ? AND item_id = (SELECT item_id FROM items WHERE item_name = ?)");
 			stmt.setInt(1, user_id);
@@ -36,7 +36,7 @@ import java.util.ArrayList;
 	    	stmt.executeQuery();
 		}
 		
-		public static ArrayList<Integer> getCartItems(int user_id){
+		public static ArrayList<Integer> getCartItems(int user_id) throws SQLException{
 			ArrayList<Integer> result = new ArrayList<Integer>();
 			int number = 0;
 			
@@ -44,7 +44,7 @@ import java.util.ArrayList;
 			PreparedStatement stmt = conn.prepareStatement("SELECT * FROM carts WHERE userID=?");
 			stmt.setInt(1, user_id);
 			ResultSet rs = null;
-			rs = ps.executeQuery();
+			rs = stmt.executeQuery();
 			
 			while(rs.next()) {
 				number = rs.getInt("balance");
@@ -54,7 +54,7 @@ import java.util.ArrayList;
 			return result;
 		}
 		
-		public static String getItemData(ArrayList<Integer> numbers) {
+		public static String getItemData(ArrayList<Integer> numbers) throws SQLException {
 			String result = "";
 			Connection conn = DriverManager.getConnection("jdbc:mysql://placeholder", "root", "password");
 			
@@ -62,7 +62,7 @@ import java.util.ArrayList;
 				PreparedStatement stmt = conn.prepareStatement("SELECT * FROM items WHERE itemID=?");
 				stmt.setInt(1, numbers.get(i));
 				ResultSet rs = null;
-				rs = ps.executeQuery();
+				rs = stmt.executeQuery();
 				
 				rs.first();
 				String name = rs.getString("name");
@@ -70,8 +70,8 @@ import java.util.ArrayList;
 				String desc = rs.getString("description");
 				
 				result += "{\"name\":" + "\"" + name + "\",";
-				result += "\"description\":" + "\"" + desc + "\",");
-				result += "\"price\":" +  price + "}");
+				result += "\"description\":" + "\"" + desc + "\",";
+				result += "\"price\":" +  price + "}";
 				if(i != numbers.size()-1) {
 					result += ",";
 				}
