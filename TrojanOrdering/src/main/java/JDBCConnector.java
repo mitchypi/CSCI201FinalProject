@@ -206,7 +206,7 @@ import java.util.ArrayList;
 			return restaurants;
 
 		}
-		public static int registerUser(String username, String password, String email, double balance) throws SQLException { //Chetan Bagri, RegisterServlet
+		public static int registerUser(String password, String email, double balance) throws SQLException { //Chetan Bagri, RegisterServlet
 		    int userID = -3;
 		    try {
 				Class.forName("com.mysql.cj.jdbc.Driver");
@@ -216,8 +216,8 @@ import java.util.ArrayList;
 
 		    Connection conn  =null;
 		    try{
-		    	conn = DriverManager.getConnection("");
-		        String query = "SELECT * FROM User WHERE email=?";
+		    	conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/TrojanOrdering", "root", "wasdwasd");
+		        String query = "SELECT * FROM Users WHERE email=?";
 		        try (PreparedStatement ps = conn.prepareStatement(query)) {
 		            ps.setString(1, email);
 		            try (ResultSet rs = ps.executeQuery()) {
@@ -226,21 +226,12 @@ import java.util.ArrayList;
 		                }
 		            }
 		        }
-		        query = "SELECT * FROM User WHERE username=?";
-		        try (PreparedStatement ps = conn.prepareStatement(query)) {
-		            ps.setString(1, username);
-		            try (ResultSet rs = ps.executeQuery()) {
-		                if (rs.next()) {
-		                    return -2; 
-		                }
-		            }
-		        }
-		        query = "INSERT INTO User (username, password, email, balance) VALUES (?, ?, ?, ?)";
+
+		        query = "INSERT INTO Users (password, email, balance) VALUES (?, ?, ?)";
 		        try (PreparedStatement ps = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
-		            ps.setString(1, username);
-		            ps.setString(2, password);
-		            ps.setString(3, email);
-		            ps.setDouble(4, balance);
+		            ps.setString(1, password);
+		            ps.setString(2, email);
+		            ps.setDouble(3, balance);
 		            int rowsAffected = ps.executeUpdate();
 		            if (rowsAffected == 1) {
 		                try (ResultSet rs = ps.getGeneratedKeys()) {
@@ -302,7 +293,7 @@ import java.util.ArrayList;
 					e1.printStackTrace();
 				}
 		    double balance = -1;
-		    String query = "SELECT balance FROM User WHERE user_id=?";
+		    String query = "SELECT balance FROM Users WHERE user_id=?";
 		    try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/TrojanOrdering", "root", "wasdwasd");
 		    		PreparedStatement ps = conn.prepareStatement(query)) {
 		    			ps.setInt(1, userID);
