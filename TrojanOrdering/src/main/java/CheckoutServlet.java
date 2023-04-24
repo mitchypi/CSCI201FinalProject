@@ -28,7 +28,7 @@ public class CheckoutServlet extends HttpServlet {
 		String json = "{\"data\":[";
 		
 		try {
-		    balance = JDBCConnector.getBalance(user_id);
+		    balance = JDBCConnector.getBalance(user_id); 
 			
 		    if(total > balance) {	//Insufficient funds
 		    	json += "{\"completed\":false}]}";
@@ -62,8 +62,19 @@ public class CheckoutServlet extends HttpServlet {
 		PrintWriter out = resp.getWriter();
 		String json = "{\"data\":[";
 		
-		ArrayList<Integer> itemNumbers = JDBCConnector.getCartItems(user_id);
-		json += JDBCConnector.getItemData(itemNumbers);
+		ArrayList<Integer> itemNumbers = null;
+		try {
+			itemNumbers = JDBCConnector.getCartItems(user_id);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			json += JDBCConnector.getItemData(itemNumbers);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		json += json += "]}";
 		
 		out.println(json);
@@ -75,6 +86,11 @@ public class CheckoutServlet extends HttpServlet {
 		int user_id = Integer.parseInt(req.getParameter("userID"));
 		String itemName = req.getParameter("itemName");
 		
-		JDBCConnector.deleteCartItems(user_id, itemName);
+		try {
+			JDBCConnector.deleteCartItems(user_id, itemName);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }
