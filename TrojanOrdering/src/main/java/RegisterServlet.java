@@ -17,12 +17,11 @@ public class RegisterServlet extends HttpServlet {
 
 	    	    
 	    String email = request.getParameter("email");
-	    String username = request.getParameter("new-username");
 	    String password = request.getParameter("new-password");
 	    String confirmPassword = request.getParameter("confirm-password");
 	        
-        if (username == null || email == null|| password == null || confirmPassword == null|| 
-        		username.isEmpty() || email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
+        if (email == null|| password == null || confirmPassword == null|| 
+        		email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
    
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             pw.println("All fields are required.");
@@ -36,8 +35,16 @@ public class RegisterServlet extends HttpServlet {
         }
         
         int result = 0;
+
+        
 		try {
-			result = JDBCConnector.registerUser(username, password, email, 3000.0);
+			result = JDBCConnector.registerUser(password, email, 3000.0); //result equals user_id if valid, otherwise -1 or -2 based on error
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		try {
+			result = JDBCConnector.registerUser(password, email, 3000.0);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -53,8 +60,18 @@ public class RegisterServlet extends HttpServlet {
             return;
         } else if (result > 0) {
             response.setStatus(HttpServletResponse.SC_OK);
-    		double balance  = JDBCConnector.getBalance(result);
-    		LoginServlet.user = new User(result, balance);
+    		double balance=3000.00;
+			try {
+				balance = JDBCConnector.getBalance(result);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+            HttpSession session = request.getSession(true);
+            
+            session.setAttribute("user_id", result);
+            session.setAttribute("email", email);
+            session.setAttribute("balance", balance);
             
         }
         else {
