@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 @WebServlet("/HomeServlet")
 public class HomeServlet extends HttpServlet {
@@ -19,7 +20,7 @@ public class HomeServlet extends HttpServlet {
         for (Restaurant rest : r){ //placeholder stuff please give me a format to work with
             System.out.println(rest.getName());
         } 
-        String html = makeHtml(r);
+        String html = makeHtml(r, request);
         //return html to javascript using fetch 
         response.setContentType("text/html");
         out.println(html);
@@ -28,7 +29,14 @@ public class HomeServlet extends HttpServlet {
 
     }
 
-    protected String makeHtml(ArrayList<Restaurant> r) {
+    protected String makeHtml(ArrayList<Restaurant> r, HttpServletRequest request) {
+    	HttpSession session = request.getSession(false);
+    	String email = "";
+    	if (session != null) {
+    	    int user_id = (Integer) session.getAttribute("user_id");
+    	    email = (String) session.getAttribute("email");
+    	    double balance = (Double) session.getAttribute("balance");
+    	}
         String html = "";
         int count = 0;
         for (Restaurant rest : r) {
@@ -47,6 +55,7 @@ public class HomeServlet extends HttpServlet {
             }
             count++;
         }
+        html += email;
         return html;
     }
 }

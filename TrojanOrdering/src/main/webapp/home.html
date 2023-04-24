@@ -97,17 +97,34 @@
     	}
 </style>
 <script src="home.js"></script>
+<script src="loggedin.js"></script>
 </head>
 <body onload="grabRestaurants()">
-  <div class="nav">
-    <ul>
-      <li><a href="login.html">LOGIN</a></li>
-      <li><a href="home.html">HOME</a></li>
-      <li><a href="restaurants.html">RESTAURANTS</a></li>
-      <li><a href="checkout.html">CHECKOUT</a></li>
-    </ul>
-    <a href = ???><img id = "profile" src = https://cdn-icons-png.flaticon.com/512/6522/6522516.png></a>
-  </div>
+<div class="nav">
+  <ul>
+    <li><a href="login.html" id="login-link">LOGIN</a></li>
+    <li><a href="home.html">HOME</a></li>
+    <li><a href="restuarants.html">RESTAURANTS</a></li>
+    <li><a href="checkout.html">CHECKOUT</a></li>
+  </ul>
+</div>
+
+<script>
+  const loginLink = document.getElementById("login-link");
+
+  const isLoggedIn = checkSessionCookie();
+
+  if (isLoggedIn) {
+    loginLink.textContent = "LOGOUT";
+    loginLink.href = "/TrojanOrdering/LogoutServlet"; 
+
+    loginLink.addEventListener("click", function(event) {
+
+      document.cookie = "JSESSIONID=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/TrojanOrdering;";
+
+    });
+  }
+</script>
   <h1>Home</h1>
   
   <div id = "main">

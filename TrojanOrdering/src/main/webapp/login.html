@@ -3,6 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <title>Login</title>
+    <script src="login.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <link rel="stylesheet" type="text/css" href="theme.css" />
     <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link
@@ -103,22 +105,43 @@
         cursor: pointer;
       }
     </style>
+    <script src="loggedin.js"></script>
+
+
+
   </head>
-  <div class="nav">
-    <ul>
-      <li><a href="login.html">LOGIN</a></li>
-      <li><a href="home.html">HOME</a></li>
-      <li><a href="restuarants.html">RESTAURANTS</a></li>
-      <li><a href="checkout.html">CHECKOUT</a></li>
-    </ul>
-  </div>
+<div class="nav">
+  <ul>
+    <li><a href="login.html" id="login-link">LOGIN</a></li>
+    <li><a href="home.html">HOME</a></li>
+    <li><a href="restuarants.html">RESTAURANTS</a></li>
+    <li><a href="checkout.html">CHECKOUT</a></li>
+  </ul>
+</div>
+
+<script>
+  const loginLink = document.getElementById("login-link");
+
+  const isLoggedIn = checkSessionCookie();
+
+  if (isLoggedIn) {
+    loginLink.textContent = "LOGOUT";
+    loginLink.href = "/TrojanOrdering/LogoutServlet"; 
+
+    loginLink.addEventListener("click", function(event) {
+
+      document.cookie = "JSESSIONID=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/TrojanOrdering;";
+
+    });
+  }
+</script>
   <br />
   <body>
     <div class="one">
       <h1>TrojanOrdering</h1>
       <p>Sign Up<br /><br />-or continue with email-</p>
       <br />
-      <form action="myServlet" method="post">
+      <form onsubmit="submitFunction(event); return false;">
         <label class="labely">Email</label><br />
         <input type="email" id="u-email" name="u-email" required /><br />
         <label class="labely">Password</label>
@@ -141,6 +164,38 @@
           }
         </script>
         <button type="submit">Sign In</button>
+      </form>
+      <br>
+      Register
+      <form onsubmit="submitFunctionR(event); return false;">
+        <label class="labely">Email</label><br />
+        <input type="email" id="u-emailR" name="u-email" required /><br />
+        <label class="labely">Password</label>
+        <div class="pass">
+          <input type="password" id="pwordR" name="pword" required />
+          <button type="button" id="show-password" onclick="showPassword()">
+            Show
+          </button>
+        </div>
+        <div class="pass">
+          <input type="password" id="pwordRC" name="pword" required />
+          <button type="button" id="show-password" onclick="showPassword()">
+            Show
+          </button>
+        </div>
+        <br /><br />
+        <!-- javascript below for "show password" -->
+        <script>
+          function showPassword() {
+            var passwordInput = document.getElementById("pwordR");
+            if (passwordInput.type === "password") {
+              passwordInput.type = "text";
+            } else {
+              passwordInput.type = "password";
+            }
+          }
+        </script>
+        <button type="submit">Register</button>
       </form>
     </div>
   </body>

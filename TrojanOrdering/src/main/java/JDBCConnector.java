@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 	public class JDBCConnector {
 	        
-		public static void deleteCartItems(int user_id) throws SQLException {
+		public static void deleteCartItems(int user_id) throws SQLException { //Cameron Davis, CheckoutServlet
 			Connection conn = DriverManager.getConnection("jdbc:mysql://placeholder", "root", "password");
 			PreparedStatement pstmt = conn.prepareStatement("DELETE * FROM carts WHERE user_id=?");
 	    	pstmt.setInt(1, user_id);
@@ -13,7 +13,7 @@ import java.util.ArrayList;
 		}
 		
 		
-		public boolean updateBalance(int user_id, double balance, double total) throws SQLException {
+		public static boolean updateBalance(int user_id, double balance, double total) throws SQLException { //Cameron Davis, CheckoutServlet
 			balance = balance - total;
 			Connection conn = DriverManager.getConnection("jdbc:mysql://placeholder", "root", "password");
 	    	PreparedStatement stmt = conn.prepareStatement("UPDATE users SET balance = ? WHERE user_id = ?");
@@ -28,7 +28,7 @@ import java.util.ArrayList;
 	    	return false;
 		}
 		
-		public static void deleteCartItems(int user_id, String itemName) throws SQLException {
+		public static void deleteCartItems(int user_id, String itemName) throws SQLException { //Cameron Davis, CheckoutServlet
 			Connection conn = DriverManager.getConnection("jdbc:mysql://placeholder", "root", "password");
 			PreparedStatement stmt = conn.prepareStatement("DELETE FROM carts WHERE user_id = ? AND item_id = (SELECT item_id FROM items WHERE item_name = ?)");
 			stmt.setInt(1, user_id);
@@ -37,7 +37,7 @@ import java.util.ArrayList;
 	    	stmt.executeQuery();
 		}
 		
-		public static ArrayList<Integer> getCartItems(int user_id) throws SQLException{
+		public static ArrayList<Integer> getCartItems(int user_id) throws SQLException{ //Cameron Davis, CheckoutServlet
 			ArrayList<Integer> result = new ArrayList<Integer>();
 			int number = 0;
 			
@@ -55,49 +55,7 @@ import java.util.ArrayList;
 			return result;
 		}
 		
-		public static void addCartItem(int user_id, String name, double price, String desc) throws SQLException {
-			Connection conn = DriverManager.getConnection("jdbc:mysql://placeholder", "root", "password");
-	        
-	        String insertSql = "INSERT INTO carts WHERE userID=? (name, price, desc) VALUES (?, ?, ?)";
-	        PreparedStatement stmt = conn.prepareStatement(insertSql);
-	        stmt.setInt(1, user_id);
-	        stmt.setString(2, name);
-	        stmt.setDouble(3, price);
-	        stmt.setString(4, desc);
-	        stmt.executeUpdate();
-		}
-		
-		/*public static String getRestaurantItems(int restaurant_id) throws SQLException
-		{
-			String result = "";
-			Connection conn = DriverManager.getConnection("jdbc:mysql://placeholder", "root", "password");
-			PreparedStatement stmt = conn.prepareStatement("SELECT * FROM items WHERE restaurant_id=?");
-			stmt.setInt(1, restaurant_id);
-			ResultSet rs = null;
-			rs = stmt.executeQuery();
-			
-			while (rs.next()) {
-				String name = rs.getString("name");
-				double price = rs.getDouble("price");
-				String desc = rs.getString("description");
-				
-				result += "{\"name\":" + "\"" + name + "\",";
-				result += "\"description\":" + "\"" + desc + "\",";
-				result += "\"price\":" +  price + "}";
-				result += ',';
-			}
-			result = result.substring(0, result.length()-1);
-			
-			stmt.close();
-			rs.close();
-			
-			return result;
-			
-			
-
-		}*/
-		
-		public static String getItemData(ArrayList<Integer> numbers) throws SQLException {
+		public static String getItemData(ArrayList<Integer> numbers) throws SQLException { //Cameron Davis, CheckoutServlet
 			String result = "";
 			Connection conn = DriverManager.getConnection("jdbc:mysql://placeholder", "root", "password");
 			
@@ -125,7 +83,7 @@ import java.util.ArrayList;
 			return result;
 		}
 
-		public static boolean insertRegistration(String username, String password, String email, double balance) {
+		public static boolean insertRegistration(String username, String password, String email, double balance) { //example by mitch not used
 			try {
 				Class.forName("com.mysql.cj.jdbc.Driver");
 			} catch (ClassNotFoundException e) {
@@ -180,7 +138,7 @@ import java.util.ArrayList;
 		    return true;
 		}
 
-	    public static boolean login(String username, String password) throws SQLException{
+	    public static boolean login(String username, String password) throws SQLException{ //example by mitch not used
 	    	try {
 				Class.forName("com.mysql.cj.jdbc.Driver");
 			} catch (ClassNotFoundException e) {
@@ -204,7 +162,7 @@ import java.util.ArrayList;
 
 	    }
 
-		public static ArrayList<Restaurant> getRestaurants(){
+		public static ArrayList<Restaurant> getRestaurants(){ //Mitch Pi, HomeServlet
 			ArrayList <Restaurant> restaurants = new ArrayList<Restaurant>();
 			try {
 				Class.forName("com.mysql.cj.jdbc.Driver");
@@ -249,7 +207,7 @@ import java.util.ArrayList;
 			return restaurants;
 
 		}
-		public int registerUser(String username, String password, String email, double balance) throws SQLException {
+		public static int registerUser(String password, String email, double balance) throws SQLException { //Chetan Bagri, RegisterServlet
 		    int userID = -3;
 		    try {
 				Class.forName("com.mysql.cj.jdbc.Driver");
@@ -259,8 +217,8 @@ import java.util.ArrayList;
 
 		    Connection conn  =null;
 		    try{
-		    	conn = DriverManager.getConnection("");
-		        String query = "SELECT * FROM User WHERE email=?";
+		    	conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/TrojanOrdering", "root", "wasdwasd");
+		        String query = "SELECT * FROM Users WHERE email=?";
 		        try (PreparedStatement ps = conn.prepareStatement(query)) {
 		            ps.setString(1, email);
 		            try (ResultSet rs = ps.executeQuery()) {
@@ -269,21 +227,12 @@ import java.util.ArrayList;
 		                }
 		            }
 		        }
-		        query = "SELECT * FROM User WHERE username=?";
-		        try (PreparedStatement ps = conn.prepareStatement(query)) {
-		            ps.setString(1, username);
-		            try (ResultSet rs = ps.executeQuery()) {
-		                if (rs.next()) {
-		                    return -2; 
-		                }
-		            }
-		        }
-		        query = "INSERT INTO User (username, password, email, balance) VALUES (?, ?, ?, ?)";
+
+		        query = "INSERT INTO Users (password, email, balance) VALUES (?, ?, ?)";
 		        try (PreparedStatement ps = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
-		            ps.setString(1, username);
-		            ps.setString(2, password);
-		            ps.setString(3, email);
-		            ps.setDouble(4, balance);
+		            ps.setString(1, password);
+		            ps.setString(2, email);
+		            ps.setDouble(3, balance);
 		            int rowsAffected = ps.executeUpdate();
 		            if (rowsAffected == 1) {
 		                try (ResultSet rs = ps.getGeneratedKeys()) {
@@ -301,17 +250,17 @@ import java.util.ArrayList;
 		}
 
 
-		public int loginUser(String username, String password) throws SQLException {
+		public static int loginUser(String email, String password) throws SQLException { //Chetan Bagri, LoginServlet
 		    int userID = -1;
 		    try {
 					Class.forName("com.mysql.cj.jdbc.Driver");
 				} catch (ClassNotFoundException e1) {
 					e1.printStackTrace();
 				}
-		    try (Connection conn = DriverManager.getConnection("")) {
-		        String query = "SELECT * FROM User WHERE username=?";
+		    try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/TrojanOrdering", "root", "wasdwasd")) {
+		        String query = "SELECT * FROM users WHERE email=?";
 		        try(PreparedStatement ps = conn.prepareStatement(query)){
-			        ps.setString(1, username);
+			        ps.setString(1, email);
 			        try(ResultSet rs = ps.executeQuery()){
 				        if (!rs.next()) {
 				            rs.close();
@@ -337,7 +286,7 @@ import java.util.ArrayList;
 		    return userID;
 		}
 
-		public static double getBalance(int userID) {
+		public static double getBalance(int userID) throws SQLException{  //Chetan Bagri+Cameron Davis, LoginServlet, CheckoutServlet
 		    try {
 					Class.forName("com.mysql.cj.jdbc.Driver");
 				} catch (ClassNotFoundException e1) {
@@ -345,8 +294,8 @@ import java.util.ArrayList;
 					e1.printStackTrace();
 				}
 		    double balance = -1;
-		    String query = "SELECT balance FROM User WHERE user_id=?";
-		    try (Connection conn = DriverManager.getConnection("");
+		    String query = "SELECT balance FROM Users WHERE user_id=?";
+		    try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/TrojanOrdering", "root", "wasdwasd");
 		    		PreparedStatement ps = conn.prepareStatement(query)) {
 		    			ps.setInt(1, userID);
 		    			try(ResultSet rs = ps.executeQuery()){
@@ -359,4 +308,45 @@ import java.util.ArrayList;
 		    }
 		    return balance;
 		}
+		
+		public static void addCartItem(int user_id, String name, double price, String desc) throws SQLException { //Zack Mazaherim MenuServlet
+			Connection conn = DriverManager.getConnection("jdbc:mysql://placeholder", "root", "password");
+
+	        String insertSql = "INSERT INTO carts WHERE userID=? (name, price, desc) VALUES (?, ?, ?)";
+	        PreparedStatement stmt = conn.prepareStatement(insertSql);
+	        stmt.setInt(1, user_id);
+	        stmt.setString(2, name);
+	        stmt.setDouble(3, price);
+	        stmt.setString(4, desc);
+	        stmt.executeUpdate();
+		}
+
+		/*public static String getRestaurantItems(int restaurant_id) throws SQLException //Zack Mazaheri, 
+		{
+			String result = "";
+			Connection conn = DriverManager.getConnection("jdbc:mysql://placeholder", "root", "password");
+			PreparedStatement stmt = conn.prepareStatement("SELECT * FROM items WHERE restaurant_id=?");
+			stmt.setInt(1, restaurant_id);
+			ResultSet rs = null;
+			rs = stmt.executeQuery();
+			
+			while (rs.next()) {
+				String name = rs.getString("name");
+				double price = rs.getDouble("price");
+				String desc = rs.getString("description");
+				
+				result += "{\"name\":" + "\"" + name + "\",";
+				result += "\"description\":" + "\"" + desc + "\",";
+				result += "\"price\":" +  price + "}";
+				result += ',';
+			}
+			result = result.substring(0, result.length()-1);
+			
+			stmt.close();
+			rs.close();
+			
+			return result;
+			
+			
+		}*/
 }

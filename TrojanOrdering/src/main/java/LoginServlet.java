@@ -5,22 +5,23 @@ import java.sql.SQLException;
 import javax.servlet.*;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
+import java.util.Stack;
+
+
 
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
-	public static User user = null;
 	private static final long serialVersionUID = 2L;
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 	    response.setContentType("text/plain");
 	    PrintWriter pw = response.getWriter();
-	    JDBCConnector JDBCConnector = new JDBCConnector();
 
 	    
-	    String username = request.getParameter("username");
+	    String email = request.getParameter("email");
 	    String password = request.getParameter("password");
 	    
-        if (username == null || password == null || 
-        		username.isEmpty() || password.isEmpty()) {
+        if (email == null || password == null || 
+        		email.isEmpty() || password.isEmpty()) {
         	System.out.println("Missing Field");
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             pw.println("All fields are required.");
@@ -29,7 +30,7 @@ public class LoginServlet extends HttpServlet {
         
         int result = 0;
 		try {
-			result = JDBCConnector.loginUser(username,password);
+			result = JDBCConnector.loginUser(email,password); //this is the user_id
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -46,8 +47,30 @@ public class LoginServlet extends HttpServlet {
             pw.println("Incorrect Password.");
             return;
         } else if (result > 0) {
-    		double balance  = JDBCConnector.getBalance(result);
-    		user = new User(result, balance);
+    		double balance = 0.00;
+			try {
+				balance = JDBCConnector.getBalance(result);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+			HttpSession session = request.getSession(true);
+        
+			// Set session attributes
+			
+			session.setAttribute("user_id", result);
+			session.setAttribute("email", email);
+			session.setAttribute("balance", balance);
+			
+			Cookie sessionCookie = new Cookie("JSESSIONID", session.getId());
+
+			// Set HttpOnly flag to false
+			sessionCookie.setHttpOnly(false);
+
+			// Add the cookie to the response
+			response.addCookie(sessionCookie);
+
             response.setStatus(HttpServletResponse.SC_OK);
         }
         else {
@@ -56,4 +79,5 @@ public class LoginServlet extends HttpServlet {
             pw.println("Bad Connection.");
         }
 	}
+
 }
