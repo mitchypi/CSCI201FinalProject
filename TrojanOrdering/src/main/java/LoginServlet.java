@@ -58,9 +58,18 @@ public class LoginServlet extends HttpServlet {
 			HttpSession session = request.getSession(true);
         
 			// Set session attributes
+			
 			session.setAttribute("user_id", result);
 			session.setAttribute("email", email);
 			session.setAttribute("balance", balance);
+			
+			Cookie sessionCookie = new Cookie("JSESSIONID", session.getId());
+
+			// Set HttpOnly flag to false
+			sessionCookie.setHttpOnly(false);
+
+			// Add the cookie to the response
+			response.addCookie(sessionCookie);
 
             response.setStatus(HttpServletResponse.SC_OK);
         }

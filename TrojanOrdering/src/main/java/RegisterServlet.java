@@ -53,7 +53,7 @@ public class RegisterServlet extends HttpServlet {
             pw.println("Username is taken.");
             return;
         } else if (result > 0) {
-            response.setStatus(HttpServletResponse.SC_OK);
+            
     		double balance=3000.00;
 			try {
 				balance = JDBCConnector.getBalance(result);
@@ -66,6 +66,15 @@ public class RegisterServlet extends HttpServlet {
             session.setAttribute("user_id", result);
             session.setAttribute("email", email);
             session.setAttribute("balance", balance);
+            
+            Cookie sessionCookie = new Cookie("JSESSIONID", session.getId());
+
+         // Set HttpOnly flag to false
+            sessionCookie.setHttpOnly(false);
+
+         // Add the cookie to the response
+            response.addCookie(sessionCookie);
+            response.setStatus(HttpServletResponse.SC_OK);
             
         }
         else {
