@@ -1,3 +1,4 @@
+
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -53,6 +54,48 @@ import java.util.ArrayList;
 			
 			return result;
 		}
+		
+		public static void addCartItem(int user_id, String name, double price, String desc) throws SQLException {
+			Connection conn = DriverManager.getConnection("jdbc:mysql://placeholder", "root", "password");
+	        
+	        String insertSql = "INSERT INTO carts WHERE userID=? (name, price, desc) VALUES (?, ?, ?)";
+	        PreparedStatement stmt = conn.prepareStatement(insertSql);
+	        stmt.setInt(1, user_id);
+	        stmt.setString(2, name);
+	        stmt.setDouble(3, price);
+	        stmt.setString(4, desc);
+	        stmt.executeUpdate();
+		}
+		
+		/*public static String getRestaurantItems(int restaurant_id) throws SQLException
+		{
+			String result = "";
+			Connection conn = DriverManager.getConnection("jdbc:mysql://placeholder", "root", "password");
+			PreparedStatement stmt = conn.prepareStatement("SELECT * FROM items WHERE restaurant_id=?");
+			stmt.setInt(1, restaurant_id);
+			ResultSet rs = null;
+			rs = stmt.executeQuery();
+			
+			while (rs.next()) {
+				String name = rs.getString("name");
+				double price = rs.getDouble("price");
+				String desc = rs.getString("description");
+				
+				result += "{\"name\":" + "\"" + name + "\",";
+				result += "\"description\":" + "\"" + desc + "\",";
+				result += "\"price\":" +  price + "}";
+				result += ',';
+			}
+			result = result.substring(0, result.length()-1);
+			
+			stmt.close();
+			rs.close();
+			
+			return result;
+			
+			
+
+		}*/
 		
 		public static String getItemData(ArrayList<Integer> numbers) throws SQLException {
 			String result = "";
