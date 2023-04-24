@@ -43,12 +43,6 @@ public class RegisterServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 		
-		try {
-			result = JDBCConnector.registerUser(password, email, 3000.0);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-        
 		
 		if (result == -1) {
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
