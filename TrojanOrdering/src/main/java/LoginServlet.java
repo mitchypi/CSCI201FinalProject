@@ -5,10 +5,13 @@ import java.sql.SQLException;
 import javax.servlet.*;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
+import java.util.Stack;
+
+
 
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
-	public static User user = null;
+	private static Stack<User> userStack;
 	private static final long serialVersionUID = 2L;
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 	    response.setContentType("text/plain");
@@ -28,7 +31,7 @@ public class LoginServlet extends HttpServlet {
         
         int result = 0;
 		try {
-			result = JDBCConnector.loginUser(email,password);
+			result = JDBCConnector.loginUser(email,password); //this is the user_id
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -45,7 +48,7 @@ public class LoginServlet extends HttpServlet {
             pw.println("Incorrect Password.");
             return;
         } else if (result > 0) {
-    		double balance;
+    		double balance = 0.00;
 			try {
 				balance = JDBCConnector.getBalance(result);
 			} catch (SQLException e) {
@@ -53,6 +56,21 @@ public class LoginServlet extends HttpServlet {
 				e.printStackTrace();
 			}
     		//user = new User(result, balance);
+			String balanceString = Double.toString(balance);
+			String resultString = Integer.toString(result);
+
+			HttpSession session = request.getSession(true);
+        
+			// Set session attributes
+			session.setAttribute("user_id", result);
+			session.setAttribute("email", email);
+			session.setAttribute("balance", balance);
+
+			Cookie user_id = new Cookie("user_id",resultString);
+			Cookie user_balance = new Cookie("balance",balanceString);
+			//setting cookie to expiry in 30 mins
+			response.addCookie(user_id);
+			response.addCookie(user_balance);
             response.setStatus(HttpServletResponse.SC_OK);
         }
         else {
@@ -60,5 +78,12 @@ public class LoginServlet extends HttpServlet {
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             pw.println("Bad Connection.");
         }
+	}
+	public static void pushUser(User user) {
+	    userStack.push(user);
+	}
+	
+	public static User peekUser() {
+	    return userStack.peek();
 	}
 }
