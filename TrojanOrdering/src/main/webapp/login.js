@@ -19,3 +19,28 @@ function submitFunction(event) {
         }
     });	
 }
+
+function submitFunctionR(event) {
+	event.preventDefault(); 	
+    const password = $("#pwordR").val();
+    const email = $("#u-emailR").val();
+    const confirmPassword = $("#pwordRC").val();
+
+    $.ajax({
+        url: "register",
+        type: "POST",
+        headers: { "Accept": "text/plain" },
+        data: { 
+            email: email,
+            "new-password": password,
+            "confirm-password": confirmPassword
+        },
+        success: function() {
+            location.href = "home.html";
+			loginUser();
+        },
+        error: function(response) {
+			alert(response.responseText);
+    	}
+	});
+}
