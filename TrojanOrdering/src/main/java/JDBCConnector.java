@@ -294,7 +294,7 @@ import java.util.ArrayList;
 		    return userID;
 		}
 
-		public double getBalance(int userID) {
+		public static double getBalance(int userID) {
 		    try {
 					Class.forName("com.mysql.cj.jdbc.Driver");
 				} catch (ClassNotFoundException e1) {
