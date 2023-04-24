@@ -3,6 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <title>Login</title>
+    <script src="login.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <link rel="stylesheet" type="text/css" href="theme.css" />
     <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link
@@ -118,7 +120,7 @@
       <h1>TrojanOrdering</h1>
       <p>Sign Up<br /><br />-or continue with email-</p>
       <br />
-      <form action="myServlet" method="post">
+      <form onsubmit="submitFunction(event); return false;">
         <label class="labely">Email</label><br />
         <input type="email" id="u-email" name="u-email" required /><br />
         <label class="labely">Password</label>
