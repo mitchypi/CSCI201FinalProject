@@ -12,11 +12,11 @@ import java.util.ArrayList;
 		}
 		
 		
-		public boolean updateBalance(int user_id, int balance, int total) throws SQLException {
+		public boolean updateBalance(int user_id, double balance, double total) throws SQLException {
 			balance = balance - total;
 			Connection conn = DriverManager.getConnection("jdbc:mysql://placeholder", "root", "password");
 	    	PreparedStatement stmt = conn.prepareStatement("UPDATE users SET balance = ? WHERE user_id = ?");
-	    	stmt.setInt(1, balance);
+	    	stmt.setDouble(1, balance);
 	    	stmt.setInt(2, user_id);
 	    	// Execute the update statement
 	    	int rowsUpdated = stmt.executeUpdate();
