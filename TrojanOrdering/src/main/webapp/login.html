@@ -144,6 +144,38 @@
         </script>
         <button type="submit">Sign In</button>
       </form>
+      <br>
+      Register
+      <form onsubmit="submitFunctionR(event); return false;">
+        <label class="labely">Email</label><br />
+        <input type="email" id="u-emailR" name="u-email" required /><br />
+        <label class="labely">Password</label>
+        <div class="pass">
+          <input type="password" id="pwordR" name="pword" required />
+          <button type="button" id="show-password" onclick="showPassword()">
+            Show
+          </button>
+        </div>
+        <div class="pass">
+          <input type="password" id="pwordRC" name="pword" required />
+          <button type="button" id="show-password" onclick="showPassword()">
+            Show
+          </button>
+        </div>
+        <br /><br />
+        <!-- javascript below for "show password" -->
+        <script>
+          function showPassword() {
+            var passwordInput = document.getElementById("pwordR");
+            if (passwordInput.type === "password") {
+              passwordInput.type = "text";
+            } else {
+              passwordInput.type = "password";
+            }
+          }
+        </script>
+        <button type="submit">Register</button>
+      </form>
     </div>
   </body>
 </html>
