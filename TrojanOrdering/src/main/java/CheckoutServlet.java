@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -19,15 +20,15 @@ public class CheckoutServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		PrintWriter out = resp.getWriter();
-		int total = Integer.parseInt(req.getParameter("total"));
+		double total = Integer.parseInt(req.getParameter("total"));
 		int user_id = Integer.parseInt(req.getParameter("userID"));
-		int balance = 0;
+		double balance = 0;
 		
 		resp.setContentType("application/json");
 		String json = "{\"data\":[";
 		
 		try {
-		    int balance = JDBCConnector.getBalance(user_id);
+		    balance = JDBCConnector.getBalance(user_id);
 			
 		    if(total > balance) {	//Insufficient funds
 		    	json += "{\"completed\":false}]}";
