@@ -14,7 +14,7 @@ public class RegisterServlet extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	    response.setContentType("text/plain");
 	    PrintWriter pw = response.getWriter();
-	    JDBCConnector JDBCConnector = new JDBCConnector();
+
 	    	    
 	    String email = request.getParameter("email");
 	    String username = request.getParameter("new-username");

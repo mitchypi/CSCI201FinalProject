@@ -13,14 +13,13 @@ public class LoginServlet extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 	    response.setContentType("text/plain");
 	    PrintWriter pw = response.getWriter();
-	    JDBCConnector JDBCConnector = new JDBCConnector();
 
 	    
-	    String username = request.getParameter("username");
+	    String email = request.getParameter("email");
 	    String password = request.getParameter("password");
 	    
-        if (username == null || password == null || 
-        		username.isEmpty() || password.isEmpty()) {
+        if (email == null || password == null || 
+        		email.isEmpty() || password.isEmpty()) {
         	System.out.println("Missing Field");
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             pw.println("All fields are required.");
@@ -29,7 +28,7 @@ public class LoginServlet extends HttpServlet {
         
         int result = 0;
 		try {
-			result = JDBCConnector.loginUser(username,password);
+			result = JDBCConnector.loginUser(email,password);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -46,8 +45,14 @@ public class LoginServlet extends HttpServlet {
             pw.println("Incorrect Password.");
             return;
         } else if (result > 0) {
-    		double balance  = JDBCConnector.getBalance(result);
-    		user = new User(result, balance);
+    		double balance;
+			try {
+				balance = JDBCConnector.getBalance(result);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+    		//user = new User(result, balance);
             response.setStatus(HttpServletResponse.SC_OK);
         }
         else {
