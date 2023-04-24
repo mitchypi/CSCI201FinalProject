@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="UTF-8">
+    <title>Login Page</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="login.js"></script>
+    <link rel="stylesheet" href="login.css">
+  </head>
+  <body>
+	<div class="navbar">
+      <div class="logo">
+        <h2>TrojanOrdering</h2>
+      </div>
+      <ul class="nav-links">
+        <li><a href="login.html" class="active">Login</a></li>
+        <li><a href="register.html">Register</a></li>
+      </ul>
+    </div>
+    
+	   	<form id="form1" name="form1" class="login" method="POST" onsubmit="submitFunction(event)">
+	        <h2>Login</h2>
+	        <label for="username">Username:</label>
+	        <input type="text" id="username">
+	        <label for="password">Password:</label>
+	        <input type="password" id="password">
+	        <button type="submit">Submit Query</button>
+	     </form>
