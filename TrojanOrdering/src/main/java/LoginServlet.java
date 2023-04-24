@@ -11,7 +11,6 @@ import java.util.Stack;
 
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
-	private static Stack<User> userStack;
 	private static final long serialVersionUID = 2L;
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 	    response.setContentType("text/plain");
@@ -55,9 +54,6 @@ public class LoginServlet extends HttpServlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-    		//user = new User(result, balance);
-			String balanceString = Double.toString(balance);
-			String resultString = Integer.toString(result);
 
 			HttpSession session = request.getSession(true);
         
@@ -66,11 +62,6 @@ public class LoginServlet extends HttpServlet {
 			session.setAttribute("email", email);
 			session.setAttribute("balance", balance);
 
-			Cookie user_id = new Cookie("user_id",resultString);
-			Cookie user_balance = new Cookie("balance",balanceString);
-			//setting cookie to expiry in 30 mins
-			response.addCookie(user_id);
-			response.addCookie(user_balance);
             response.setStatus(HttpServletResponse.SC_OK);
         }
         else {
@@ -79,11 +70,5 @@ public class LoginServlet extends HttpServlet {
             pw.println("Bad Connection.");
         }
 	}
-	public static void pushUser(User user) {
-	    userStack.push(user);
-	}
-	
-	public static User peekUser() {
-	    return userStack.peek();
-	}
+
 }
