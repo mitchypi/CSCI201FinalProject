@@ -18,6 +18,8 @@ public class UserIDServlet extends HttpServlet {
 
 	    // Get the user_id from the session
 	    int user_id = (int) session.getAttribute("user_id");
+	    double balance = (double) session.getAttribute("balance");
+
 	    String user_id_str = Integer.toString(user_id);
 	    
 	    // Set the content type of the response
@@ -26,6 +28,7 @@ public class UserIDServlet extends HttpServlet {
 	    // Write the user_id to the response output stream
 	    PrintWriter out = response.getWriter();
 	    out.println(user_id);
+	    out.println(balance);
         out.flush();
         out.close();
 	}
