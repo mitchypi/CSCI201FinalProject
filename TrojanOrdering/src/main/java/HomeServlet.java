@@ -43,10 +43,11 @@ public class HomeServlet extends HttpServlet {
             String name = rest.getName();
             String address = rest.getAddress();
             String image = rest.getURL();
+            int id = rest.getID();
             if (count % 2 == 0) { // start a new row
                 html += "<div class = \"row\">\n";
             }
-            html += "<a class = \"container\" href = \"restaurants.html...\"> <!--redirect to restaurants page for specified restaurant-->\n"
+            html += "<a class = \"container\" href = \"menu.html?restaurant_id="+id+"\"> <!--redirect to restaurants page for specified restaurant-->\n"
                 + "<img src = \""+image+"\">\n"
                 + "<div class = \"caption\">"+name+"</div>\n"
                 + "</a>\n";
