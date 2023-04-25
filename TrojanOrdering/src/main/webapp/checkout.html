@@ -1,11 +1,216 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href="theme.css">
-</head>
-<body>
-Get cart from stored session and 
-</body>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Login</title>
+    <link rel="stylesheet" type="text/css" href="theme.css" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Racing+Sans+One&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inconsolata&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        background-color: #F3EFE5;
+        display: flex;
+        flex-direction: column;
+      }
+      .totals {
+         display: flex;
+        justify-content: space-between;
+     }
+
+      .totals-item {
+        flex-basis: 25%;
+        margin-right: 10px;
+     }
+      .nav {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+      }
+      h1 {
+        font-family: "Racing Sans One", sans-serif;
+        font-size: 70px;
+      }
+      p {
+        text-align: center;
+      }
+      .labely {
+        font-weight: bold;
+        padding-left: 10px;
+      }
+      .one {
+        margin: 0 auto;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+      input {
+        width: 95%;
+        border-radius: 10px;
+        background-color: #CFCFCF;
+        padding: 8px;
+        font-size: 16px;
+      }
+      h1 {
+        color: #B51717;
+      }
+      li {
+        float: left;
+      }
+      ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+      }
+      a {
+        display: block;
+        padding: 8px;
+        color: black;
+        font-family: Inconsolata, monospace;
+      }
+      form {
+        font-family: Inconsolata, monospace;
+      }
+      button[type="submit"] {
+        width: 100%;
+        background-color: #B51717;
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        font-family: Inconsolata, monospace;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+
+      .cart-buttons {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+      }
+      .pass {
+        display: flex;
+        align-items: center;
+      }
+      .shopping-cart-wrapper {
+       display: flex;
+       justify-content: center;
+       align-items: center;
+       flex-direction: column;
+      } 
+      .one input {
+        width: 95%;
+        border-radius: 10px;
+        background-color: #CFCFCF;
+        padding: 8px;
+        font-size: 16px;
+        margin: 10px 0;
+        margin-left: 10px;
+      }
+      .pass label,
+      .pass input {
+        display: inline-block;
+      }
+      .pass input {
+        margin-left: 10px;
+      }
+      .pass button {
+        border: none;
+        background: none;
+        font-size: 14px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+ <header class="intro">
+    <header class="intro" style="text-align: center;">
+      <h1>TrojanOrdering</h1>
+      <!-- <h2 style="display: inline-block; margin-right: 20px;">Login</h2>
+      <h2 style="display: inline-block; margin-right: 20px;">Home</h2>
+      <h2 style="display: inline-block; margin-right: 20px;">Stores</h2>
+      <h2 style="display: inline-block;">Checkout</h2> -->
+    </header>
+  
+    <div class="nav">
+      <ul>
+        <li><a href="login.html">LOGIN</a></li>
+        <li><a href="home.html">HOME</a></li>
+        <li><a href="restuarants.html">RESTAURANTS</a></li>
+        <li><a href="checkout.html">CHECKOUT</a></li>
+      </ul>
+    </div>
+  
+  <br />
+  <br />
+ <main>
+  <div class="cart-buttons">  
+    <div style="align-items: right;">
+     <button id="emptycart">EMPTY ALL</button>
+   </div>
+  </div>
+
+     <!-- Start DEMO HTML (Use the following code into your project)-->
+<div class="shopping-cart-wrapper">
+  <table class="table is-fullwidth shopping-cart">
+    <thead>
+      <tr>
+        <th><abbr title="Position"></abbr></th>
+        <th></th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Total</th>
+        <th></th>
+      </tr>
+    </thead>
+  </table>
+  <div class="totals">
+    <div class="totals-item">
+      <label>Subtotal</label>
+      <div class="totals-value" id="cart-subtotal">￥0</div>
+    </div>
+    <div class="totals-item">
+      <label>Tax (5%)</label>
+      <div class="totals-value" id="cart-tax">￥0</div>
+    </div>
+    <div class="totals-item">
+      <label>Delivery</label>
+      <div class="totals-value" id="cart-shipping">￥0</div>
+    </div>
+    <div class="totals-item totals-item-total">
+      <label>Grand Total</label>
+      <div class="totals-value" id="cart-total">￥0</div>
+    </div>
+  </div>
+  <div class="cart-buttons">  
+    <div style="width: 300px; height: 50px; display: flex; justify-content: center; align-items: center; margin: auto;">
+      <button id="time" style="margin-right: 20px;">Select Time </button>
+      <button id="location">Select Location </button>
+    </div>
+  </div>
+    
+  <div class="cart-buttons">  
+    <div style="width: 300px; height: 25px; display: flex; justify-content: center; align-items: center; margin: auto;">
+      <button id="checkout">Submit Order</button>
+    </div>
+  </div>
+
+</div>
+     <!-- END EDMO HTML (Happy Coding!)-->
+ </main>
+  
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
+    <script  src="./js/script.js"></script>
+  
+  </body>
 </html>

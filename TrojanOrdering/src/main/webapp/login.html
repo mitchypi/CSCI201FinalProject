@@ -1,11 +1,202 @@
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href="theme.css">
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Login</title>
+    <script src="login.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="theme.css" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Racing+Sans+One&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inconsolata&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        background-color: #F3EFE5;
+        display: flex;
+        flex-direction: column;
+      }
+      h1 {
+        font-family: "Racing Sans One", sans-serif;
+        font-size: 70px;
+      }
+      p {
+        text-align: center;
+      }
+      .labely {
+        font-weight: bold;
+        padding-left: 10px;
+      }
+      .one {
+        margin: 0 auto;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+      input {
+        width: 95%;
+        border-radius: 10px;
+        background-color: #CFCFCF;
+        padding: 8px;
+        font-size: 16px;
+      }
+      h1 {
+        color: #B51717;
+      }
+      li {
+        float: left;
+      }
+      ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+      }
+      a {
+        display: block;
+        padding: 8px;
+        color: black;
+        font-family: Inconsolata, monospace;
+      }
+      form {
+        font-family: Inconsolata, monospace;
+      }
+      button[type="submit"] {
+        width: 100%;
+        background-color: #B51717;
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        font-family: Inconsolata, monospace;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+      .pass {
+        display: flex;
+        align-items: center;
+      }
+      .one input {
+        width: 95%;
+        border-radius: 10px;
+        background-color: #CFCFCF;
+        padding: 8px;
+        font-size: 16px;
+        margin: 10px 0;
+        margin-left: 10px;
+      }
+      .pass label,
+      .pass input {
+        display: inline-block;
+      }
+      .pass input {
+        margin-left: 10px;
+      }
+      .pass button {
+        border: none;
+        background: none;
+        font-size: 14px;
+        cursor: pointer;
+      }
+    </style>
+    <script src="loggedin.js"></script>
 
-</body>
+
+
+  </head>
+<div class="nav">
+  <ul>
+    <li><a href="login.html" id="login-link">LOGIN</a></li>
+    <li><a href="home.html">HOME</a></li>
+    <li><a href="restuarants.html">RESTAURANTS</a></li>
+    <li><a href="checkout.html">CHECKOUT</a></li>
+  </ul>
+</div>
+
+<script>
+  const loginLink = document.getElementById("login-link");
+
+  const isLoggedIn = checkSessionCookie();
+
+  if (isLoggedIn) {
+    loginLink.textContent = "LOGOUT";
+    loginLink.href = "/TrojanOrdering/LogoutServlet"; 
+
+    loginLink.addEventListener("click", function(event) {
+
+      document.cookie = "JSESSIONID=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/TrojanOrdering;";
+
+    });
+  }
+</script>
+  <br />
+  <body>
+    <div class="one">
+      <h1>TrojanOrdering</h1>
+      <p>Sign Up<br /><br />-or continue with email-</p>
+      <br />
+      <form onsubmit="submitFunction(event); return false;">
+        <label class="labely">Email</label><br />
+        <input type="email" id="u-email" name="u-email" required /><br />
+        <label class="labely">Password</label>
+        <div class="pass">
+          <input type="password" id="pword" name="pword" required />
+          <button type="button" id="show-password" onclick="showPassword()">
+            Show
+          </button>
+        </div>
+        <br /><br />
+        <!-- javascript below for "show password" -->
+        <script>
+          function showPassword() {
+            var passwordInput = document.getElementById("pword");
+            if (passwordInput.type === "password") {
+              passwordInput.type = "text";
+            } else {
+              passwordInput.type = "password";
+            }
+          }
+        </script>
+        <button type="submit">Sign In</button>
+      </form>
+      <br>
+      Register
+      <form onsubmit="submitFunctionR(event); return false;">
+        <label class="labely">Email</label><br />
+        <input type="email" id="u-emailR" name="u-email" required /><br />
+        <label class="labely">Password</label>
+        <div class="pass">
+          <input type="password" id="pwordR" name="pword" required />
+          <button type="button" id="show-password" onclick="showPassword()">
+            Show
+          </button>
+        </div>
+        <div class="pass">
+          <input type="password" id="pwordRC" name="pword" required />
+          <button type="button" id="show-password" onclick="showPassword()">
+            Show
+          </button>
+        </div>
+        <br /><br />
+        <!-- javascript below for "show password" -->
+        <script>
+          function showPassword() {
+            var passwordInput = document.getElementById("pwordR");
+            if (passwordInput.type === "password") {
+              passwordInput.type = "text";
+            } else {
+              passwordInput.type = "password";
+            }
+          }
+        </script>
+        <button type="submit">Register</button>
+      </form>
+    </div>
+  </body>
 </html>
