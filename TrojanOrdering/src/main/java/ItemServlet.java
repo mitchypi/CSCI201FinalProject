@@ -1,5 +1,3 @@
-package finalproj;
-
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -11,26 +9,24 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/MenuServlet")
+@WebServlet("/ItemServlet")
 public class ItemServlet extends HttpServlet {
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) //this should probably be a doPost
             throws ServletException, IOException {
     	PrintWriter out = response.getWriter();
     	int user_id = Integer.parseInt(request.getParameter("userID"));
-    	String name = request.getParameter("name");
-    	double price = Integer.parseInt(request.getParameter("price"));
-    	String desc = request.getParameter("desc");
-    	String imgUrl = request.getParameter("imgUrl");
+    	int item_id = Integer.parseInt(request.getParameter("itemID"));
     	
     	try {
-			JDBCConnector.addCartItem(user_id, name, price, desc, imgUrl);
+			JDBCConnector.addCartItem(user_id, item_id);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
     	
+    	/*
 		String json = "{\"name\":" + "\"" + name + "\","
 			+ "\"description\":" + "\"" + desc + "\","
 			+ "\"price\":" +  price + "}";
@@ -38,6 +34,7 @@ public class ItemServlet extends HttpServlet {
 
 	    response.setContentType("application/json");
 	    out.println(json);
+	    */
 	    out.flush();
 	    out.close();
     	
