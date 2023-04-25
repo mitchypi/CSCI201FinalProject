@@ -3,7 +3,7 @@
 #name{
 	display: inline;
 	float: left;
-	margin-left: 35%;
+	margin-left: 32%;
 	width: 120px;
 }
 
@@ -13,23 +13,27 @@
 }
 
 table{
-	width:45%;
-	margin: auto;
+	width:40%;
+	margin-left:30%;
 }
 
 #button{
 	display: inline;
 	float: right;
-	margin-right: 35%;
+	margin-right: 40%;
+	background-color: #3393cc;
+	border: #308ac0 0.5px solid;
 }
 
 #image{
 	max-height:300px;
+	max-width: 400px;
 	padding: 30px;
 }
 
 #headName{
 	padding: 30px;
+	font-size: 20px;
 }
 
 #div1{
@@ -38,4 +42,110 @@ table{
 
 form{
 	display: block;
+}
+
+.nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+li {
+  float: left;
+}
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+a {
+  display: block;
+  padding: 8px;
+  color: black;
+  font-family: Inconsolata, monospace;
+}
+
+body {
+  background-color: #F3EFE5;
+  display: flex;
+  flex-direction: column;
+}
+
+
+
+
+
+.button {
+  float: right;
+  margin-right: 45%;
+  font-size: 12px;
+  color: black;
+  border: 1px solid #308ac0;
+  background-color: #3393cc;
+  text-decoration: none;
+  width:80px;
+  height:7px;
+}
+
+
+.overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.7);
+  transition: opacity 500ms;
+  visibility: hidden;
+  opacity: 0;
+}
+.overlay:target {
+  visibility: visible;
+  opacity: 1;
+}
+
+.popup {
+  margin: 70px auto;
+  padding: 20px;
+  background: #F3EFE5;
+  border-radius: 5px;
+  width: 30%;
+  position: relative;
+  transition: all 5s ease-in-out;
+}
+
+.popup h2 {
+  margin-top: 0;
+  color: #333;
+  font-family: Tahoma, Arial, sans-serif;
+}
+.popup .close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  transition: all 200ms;
+  font-size: 30px;
+  font-weight: bold;
+  text-decoration: none;
+  color: #333;
+}
+
+.popup .content {
+  max-height: 30%;
+  overflow: auto;
+  text-align: center;
+}
+
+@media screen and (max-width: 700px){
+  .popup{
+    width: 70%;
+  }
+}
+
+#nima{
+  max-height:100px;
+}
+
+#quantity{
+	width:25px;
 }
