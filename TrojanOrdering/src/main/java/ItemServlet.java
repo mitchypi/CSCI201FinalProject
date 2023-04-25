@@ -12,26 +12,34 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @WebServlet("/MenuServlet")
-public class MenuServlet extends HttpServlet {
+public class ItemServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
     	PrintWriter out = response.getWriter();
-    	int restaurant_id = Integer.parseInt(request.getParameter("restaurant_id"));
+    	int user_id = Integer.parseInt(request.getParameter("userID"));
+    	String name = request.getParameter("name");
+    	double price = Integer.parseInt(request.getParameter("price"));
+    	String desc = request.getParameter("desc");
+    	String imgUrl = request.getParameter("imgUrl");
     	
-    	String json;
-		try {
-			json = JDBCConnector.getRestaurantItems(restaurant_id);
-			System.out.println(json);
-		    response.setContentType("application/json");
-		    out.println(json);
-		    out.flush();
-		    out.close();
+    	try {
+			JDBCConnector.addCartItem(user_id, name, price, desc, imgUrl);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+    	
+		String json = "{\"name\":" + "\"" + name + "\","
+			+ "\"description\":" + "\"" + desc + "\","
+			+ "\"price\":" +  price + "}";
+		System.out.println(json);
+
+	    response.setContentType("application/json");
+	    out.println(json);
+	    out.flush();
+	    out.close();
     	
     
     	
