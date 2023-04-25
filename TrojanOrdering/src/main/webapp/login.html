@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <title>Login</title>
     <script src="login.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <link rel="stylesheet" type="text/css" href="theme.css" />
     <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link
@@ -18,13 +18,14 @@
     />
     <style>
       body {
-        background-color: #F3EFE5;
+        background-color: #f3efe5;
         display: flex;
         flex-direction: column;
       }
       h1 {
         font-family: "Racing Sans One", sans-serif;
         font-size: 70px;
+        color: #b51717;
       }
       p {
         text-align: center;
@@ -43,13 +44,11 @@
       input {
         width: 95%;
         border-radius: 10px;
-        background-color: #CFCFCF;
+        background-color: #cfcfcf;
         padding: 8px;
         font-size: 16px;
       }
-      h1 {
-        color: #B51717;
-      }
+
       li {
         float: left;
       }
@@ -69,7 +68,7 @@
       }
       button[type="submit"] {
         width: 100%;
-        background-color: #B51717;
+        background-color: #b51717;
         color: white;
         padding: 14px 20px;
         margin: 8px 0;
@@ -85,7 +84,7 @@
       .one input {
         width: 95%;
         border-radius: 10px;
-        background-color: #CFCFCF;
+        background-color: #cfcfcf;
         padding: 8px;
         font-size: 16px;
         margin: 10px 0;
@@ -104,90 +103,177 @@
         font-size: 14px;
         cursor: pointer;
       }
+
+      .sign-up {
+        color: red;
+        text-align: center;
+        text-decoration: none;
+        font-family: Inconsolata, monospace;
+      }
+
+      .cont {
+        text-align: center;
+        text-decoration: none;
+        font-family: Inconsolata, monospace;
+      }
+
+      .button-s {
+        padding: 10px;
+
+        color: red;
+        text-align: center;
+        /*   border: 2px solid #06D85F; */
+        border-radius: 20px/50px;
+        text-decoration: underline;
+        cursor: pointer;
+        /*   transition: font-size 0.3s ease; */
+
+        transition: color 0.3s ease;
+      }
+      .button-s:hover {
+        color: #c30b0b;
+      }
+
+      .overlay {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 100%;
+        transform: translate(-50%, -50%);
+        background: transparent;
+        transition: opacity 500ms;
+        visibility: hidden;
+        opacity: 0;
+      }
+
+      .overlay:target {
+        visibility: visible;
+        opacity: 1;
+      }
+
+      .popup {
+        margin: 70px auto;
+        padding: 20px;
+        background: #fff;
+        border-radius: 5px;
+        width: 70%;
+        position: relative;
+        transition: all 5s ease-in-out;
+      }
+
+      .popup h2 {
+        margin-top: 0;
+        color: #333;
+        text-align: center;
+        font-family: Tahoma, Arial, sans-serif;
+      }
+      .popup .close {
+        position: absolute;
+        top: 20px;
+        right: 30px;
+        transition: all 200ms;
+        font-size: 30px;
+        font-weight: bold;
+        text-decoration: none;
+        color: #333;
+      }
+      .popup .close:hover {
+        color: red;
+      }
+      .popup .content {
+        max-height: 30%;
+        overflow: auto;
+      }
     </style>
+
     <script src="loggedin.js"></script>
-
-
-
   </head>
-<div class="nav">
-  <ul>
-    <li><a href="login.html" id="login-link">LOGIN</a></li>
-    <li><a href="home.html">HOME</a></li>
-    <li><a href="restuarants.html">RESTAURANTS</a></li>
-    <li><a href="checkout.html">CHECKOUT</a></li>
-  </ul>
-</div>
+  <div class="nav">
+    <ul>
+      <li><a href="login.html" id="login-link">LOGIN</a></li>
+      <li><a href="home.html">HOME</a></li>
+      <li><a href="restuarants.html">RESTAURANTS</a></li>
+      <li><a href="checkout.html">CHECKOUT</a></li>
+    </ul>
+  </div>
 
-<script>
-  const loginLink = document.getElementById("login-link");
+  <script>
+    const loginLink = document.getElementById("login-link");
 
-  const isLoggedIn = checkSessionCookie();
+    const isLoggedIn = checkSessionCookie();
 
-  if (isLoggedIn) {
-    loginLink.textContent = "LOGOUT";
-    loginLink.href = "/TrojanOrdering/LogoutServlet"; 
+    if (isLoggedIn) {
+      loginLink.textContent = "LOGOUT";
+      loginLink.href = "/TrojanOrdering/LogoutServlet";
 
-    loginLink.addEventListener("click", function(event) {
-
-      document.cookie = "JSESSIONID=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/TrojanOrdering;";
-
-    });
-  }
-</script>
+      loginLink.addEventListener("click", function (event) {
+        document.cookie =
+          "JSESSIONID=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/TrojanOrdering;";
+      });
+    }
+  </script>
   <br />
   <body>
     <div class="one">
       <h1>TrojanOrdering</h1>
-      <p>Sign Up<br /><br />-or continue with email-</p>
-      <br />
-      <form onsubmit="submitFunction(event); return false;">
-        <label class="labely">Email</label><br />
-        <input type="email" id="u-email" name="u-email" required /><br />
-        <label class="labely">Password</label>
-        <div class="pass">
-          <input type="password" id="pword" name="pword" required />
-          <button type="button" id="show-password" onclick="showPassword()">
-            Show
-          </button>
+
+      <div class="box">
+        <a class="button-s" href="#popup1">Sign Up</a>
+      </div>
+
+      <div id="popup1" class="overlay">
+        <div class="popup">
+          <h2>New User Registration</h2>
+          <a class="close" href="#">&times;</a>
+          <div class="content">
+            <form onsubmit="submitFunction(event); return false;">
+              <label class="labely">Email</label><br />
+              <input type="email" id="u-email" name="u-email" required /><br />
+              <label class="labely">Password</label>
+              <div class="pass">
+                <input type="password" id="pword" name="pword" required />
+                <button
+                  type="button"
+                  id="show-password"
+                  onclick="showPassword()"
+                >
+                  Show
+                </button>
+              </div>
+              <br /><br />
+              <!-- javascript below for "show password" -->
+              <script>
+                function showPassword() {
+                  var passwordInput = document.getElementById("pword");
+                  if (passwordInput.type === "password") {
+                    passwordInput.type = "text";
+                  } else {
+                    passwordInput.type = "password";
+                  }
+                }
+              </script>
+              <button type="submit">Submit</button>
+            </form>
+          </div>
         </div>
-        <br /><br />
-        <!-- javascript below for "show password" -->
-        <script>
-          function showPassword() {
-            var passwordInput = document.getElementById("pword");
-            if (passwordInput.type === "password") {
-              passwordInput.type = "text";
-            } else {
-              passwordInput.type = "password";
-            }
-          }
-        </script>
-        <button type="submit">Sign In</button>
-      </form>
-      <br>
-      Register
+      </div>
+
+      <p class="cont">-or continue with email-</p>
       <form onsubmit="submitFunctionR(event); return false;">
         <label class="labely">Email</label><br />
         <input type="email" id="u-emailR" name="u-email" required /><br />
         <label class="labely">Password</label>
         <div class="pass">
-          <input type="password" id="pwordR" name="pword" required />
-          <button type="button" id="show-password" onclick="showPassword()">
-            Show
-          </button>
-        </div>
-        <div class="pass">
           <input type="password" id="pwordRC" name="pword" required />
-          <button type="button" id="show-password" onclick="showPassword()">
+          <button type="button" id="show-password2" onclick="showPassword2()">
             Show
           </button>
         </div>
         <br /><br />
         <!-- javascript below for "show password" -->
         <script>
-          function showPassword() {
-            var passwordInput = document.getElementById("pwordR");
+          function showPassword2() {
+            var passwordInput = document.getElementById("pwordRC");
             if (passwordInput.type === "password") {
               passwordInput.type = "text";
             } else {
