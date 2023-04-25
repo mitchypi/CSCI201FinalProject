@@ -47,7 +47,7 @@ import java.util.ArrayList;
 			rs = stmt.executeQuery();
 			
 			while(rs.next()) {
-				number = rs.getInt("balance");
+				number = rs.getInt("item_id");
 				result.add(number);
 			}
 			
