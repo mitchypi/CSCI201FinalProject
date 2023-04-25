@@ -337,6 +337,7 @@ import java.util.ArrayList;
 				
 				result += "{\"name\":" + "\"" + name + "\",";
 				result += "\"description\":" + "\"" + desc + "\",";
+				result += "\"imgUrl\":" + "\"" + imgUrl + "\",";
 				result += "\"price\":" +  price + "}";
 				result += ',';
 			}
