@@ -308,16 +308,14 @@ import java.util.ArrayList;
 		    return balance;
 		}
 		
-		public static void addCartItem(int user_id, String name, double price, String desc) throws SQLException { //Zack Mazaheri MenuServlet
-			Connection conn = DriverManager.getConnection("jdbc:mysql://placeholder", "root", "password");
+		public static void addCartItem(int user_id, int item_id) throws SQLException { //Zack Mazaheri MenuServlet/Itemservlet
+		    Connection conn = DriverManager.getConnection("jdbc:mysql://placeholder", "root", "password");
 
-	        String insertSql = "INSERT INTO carts WHERE userID=? (name, price, desc) VALUES (?, ?, ?)";
-	        PreparedStatement stmt = conn.prepareStatement(insertSql);
-	        stmt.setInt(1, user_id);
-	        stmt.setString(2, name);
-	        stmt.setDouble(3, price);
-	        stmt.setString(4, desc);
-	        stmt.executeUpdate();
+		    String insertSql = "INSERT INTO carts (user_id, item_id) VALUES (?, ?)";
+		    PreparedStatement stmt = conn.prepareStatement(insertSql);
+		    stmt.setInt(1, user_id);
+		    stmt.setInt(2, item_id);
+		    stmt.executeUpdate();
 		}
 		
 		public static String getRestaurantItems(int restaurant_id) throws SQLException //Zack Mazaheri MenuServlet/ItemServlet
