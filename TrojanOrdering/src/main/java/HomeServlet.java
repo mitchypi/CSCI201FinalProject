@@ -34,7 +34,7 @@ public class HomeServlet extends HttpServlet {
     	String email = "";
     	if (session != null) {
     	    int user_id = (Integer) session.getAttribute("user_id");
-    	    email = (String) session.getAttribute("email");
+    	    email = (String) session.getAttribute("email"); //get session 
     	    double balance = (Double) session.getAttribute("balance");
     	}
         String html = "";

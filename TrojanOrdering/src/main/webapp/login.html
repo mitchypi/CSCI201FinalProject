@@ -226,12 +226,12 @@
           <h2>New User Registration</h2>
           <a class="close" href="#">&times;</a>
           <div class="content">
-            <form onsubmit="submitFunction(event); return false;">
+            <form onsubmit="submitFunctionR(event); return false;">
               <label class="labely">Email</label><br />
-              <input type="email" id="u-email" name="u-email" required /><br />
+              <input type="email" id="u-emailR" name="u-email" required /><br />
               <label class="labely">Password</label>
               <div class="pass">
-                <input type="password" id="pword" name="pword" required />
+                <input type="password" id="pwordR" name="pword" required />
                 <button
                   type="button"
                   id="show-password"
@@ -240,31 +240,50 @@
                   Show
                 </button>
               </div>
+              <label class="labely">Confirm Password</label>
+                 <div class="pass">
+                <input type="password" id="pwordRC" name="pword1" required />
+                <button
+                  type="button"
+                  id="show-password3"
+                  onclick="showPassword3()"
+                >
+                  Show
+                </button>
+              </div>
               <br /><br />
               <!-- javascript below for "show password" -->
               <script>
                 function showPassword() {
-                  var passwordInput = document.getElementById("pword");
+                  var passwordInput = document.getElementById("pwordR");
                   if (passwordInput.type === "password") {
                     passwordInput.type = "text";
                   } else {
                     passwordInput.type = "password";
                   }
                 }
+                function showPassword3() {
+                    var passwordInput = document.getElementById("pwordRC");
+                    if (passwordInput.type === "password") {
+                      passwordInput.type = "text";
+                    } else {
+                      passwordInput.type = "password";
+                    }
+                  }
               </script>
-              <button type="submit">Submit</button>
+              <button type="submit">Register</button>
             </form>
           </div>
         </div>
       </div>
 
       <p class="cont">-or continue with email-</p>
-      <form onsubmit="submitFunctionR(event); return false;">
+      <form onsubmit="submitFunction(event); return false;">
         <label class="labely">Email</label><br />
-        <input type="email" id="u-emailR" name="u-email" required /><br />
+        <input type="email" id="u-email" name="u-email" required /><br />
         <label class="labely">Password</label>
         <div class="pass">
-          <input type="password" id="pwordRC" name="pword" required />
+          <input type="password" id="pword" name="pword" required />
           <button type="button" id="show-password2" onclick="showPassword2()">
             Show
           </button>
@@ -273,7 +292,7 @@
         <!-- javascript below for "show password" -->
         <script>
           function showPassword2() {
-            var passwordInput = document.getElementById("pwordRC");
+            var passwordInput = document.getElementById("pword");
             if (passwordInput.type === "password") {
               passwordInput.type = "text";
             } else {
@@ -281,7 +300,7 @@
             }
           }
         </script>
-        <button type="submit">Register</button>
+        <button type="submit">Login</button>
       </form>
     </div>
   </body>
