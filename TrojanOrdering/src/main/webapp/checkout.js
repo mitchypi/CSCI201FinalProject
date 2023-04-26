@@ -16,7 +16,7 @@ $(function() {
   //var jsonData = [
   var i = 0;
   const items = [];
-    fetch('/checkout?userID=1234')
+    fetch('/Tro/checkout?userID=1234')
      .then(response => response.json())
      .then(data => {
         // process the JSON data here
