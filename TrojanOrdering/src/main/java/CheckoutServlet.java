@@ -35,7 +35,7 @@ public class CheckoutServlet extends HttpServlet {
 		    }else {	//Update the user's balance
 		    	
 		    	if (JDBCConnector.updateBalance(user_id, balance, total)) {
-		    		json += json += "{\"completed\":true}]}";
+		    		json += "{\"completed\":true}]}";
 		    	}
 		    	
 		    	JDBCConnector.deleteCartItems(user_id);
