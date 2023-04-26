@@ -76,8 +76,8 @@ public class CheckoutServlet extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		json += json += "]}";
-		
+		json += "]}";
+		System.out.println(json);
 		out.println(json);
 		out.flush();
 		out.close();

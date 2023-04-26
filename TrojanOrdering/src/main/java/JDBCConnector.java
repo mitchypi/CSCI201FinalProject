@@ -103,7 +103,7 @@ import java.util.ArrayList;
 
 		        stmt.close();
 		        rs.close();
-		        System.out.println("hi");
+		        System.out.println("getItemData()");
 		    }
 		    System.out.println(result);
 		    return result;
