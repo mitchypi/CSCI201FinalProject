@@ -1,4 +1,4 @@
-function grabRestaurants(){
+function grabRestaurants() {
   let url = "HomeServlet";
   fetch(url, {
       method: "POST",
@@ -11,12 +11,13 @@ function grabRestaurants(){
       // Replace the contents of a div with the HTML response
       document.getElementById('restaurants').innerHTML = html;
 
-      // get all the <a> elements on the page
-      const aElements = document.getElementsByTagName('a');
+      // get all the <a> elements on the page that do not have the "nav-exclude" class
+      const aElements = document.querySelectorAll('a:not(.nav-exclude)');
 
       // loop through each <a> element
       for (let i = 0; i < aElements.length; i++) {
         // add a click event listener to each <a> element
+        console.log(`Adding click event listener to <a> element with ID ${aElements[i].getAttribute('id')}.`);
         aElements[i].addEventListener('click', function(event) {
           // prevent the default behavior of clicking on a link (i.e. redirecting to a new page)
           event.preventDefault();
@@ -36,5 +37,4 @@ function grabRestaurants(){
       }
     })
     .catch(error => console.error(error));
-  //print out alert of what server prints
 }
