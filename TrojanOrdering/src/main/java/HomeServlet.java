@@ -45,12 +45,12 @@ public class HomeServlet extends HttpServlet {
             String image = rest.getURL();
             int id = rest.getID();
             if (count % 2 == 0) { // start a new row
-                html += "<div class = \"row\">\n";
+                html += "<div class=\"row\">\n";
             }
-            html += "<a class = \"container\" href = \"menu.html?restaurant_id="+id+"\"> <!--redirect to restaurants page for specified restaurant-->\n"
-                + "<img src = \""+image+"\">\n"
-                + "<div class = \"caption\">"+name+"</div>\n"
-                + "</a>\n";
+            html += "<a id=\"" + id + "\" class=\"container\" href=\"menu.html\"> <!--redirect to restaurants page for specified restaurant-->\n"
+                    + "<img src=\"" + image + "\">\n"
+                    + "<div class=\"caption\">" + name + "</div>\n"
+                    + "</a>\n";
             if (count % 2 != 0 || count == r.size() - 1) { // close the row if it's the second restaurant in the row or if it's the last restaurant in the list
                 html += "</div>\n";
             }

@@ -62,6 +62,7 @@ public class LoginServlet extends HttpServlet {
 			session.setAttribute("user_id", result);
 			session.setAttribute("email", email);
 			session.setAttribute("balance", balance);
+			session.setAttribute("restaurant_id", 0);
 			
 			Cookie sessionCookie = new Cookie("JSESSIONID", session.getId());
 
