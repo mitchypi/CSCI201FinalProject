@@ -59,6 +59,7 @@ public class CheckoutServlet extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException { //first populates an ArrayList of ints that correspond to itemids, then creates a json response and sends it back to the frontend
 		int user_id = Integer.parseInt(req.getParameter("userID"));
+		System.out.println(user_id);
 		PrintWriter out = resp.getWriter();
 		String json = "{\"data\":[";
 		

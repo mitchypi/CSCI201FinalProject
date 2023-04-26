@@ -4,7 +4,12 @@ import java.util.ArrayList;
 	public class JDBCConnector {
 	        
 		public static void deleteCartItems(int user_id) throws SQLException { //Cameron Davis, CheckoutServlet
-			Connection conn = DriverManager.getConnection("jdbc:mysql://placeholder", "root", "password");
+		    try {
+				Class.forName("com.mysql.cj.jdbc.Driver");
+			} catch (ClassNotFoundException e1) {
+				e1.printStackTrace();
+			}
+			Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/TrojanOrdering", "root", "wasdwasd");
 			PreparedStatement pstmt = conn.prepareStatement("DELETE * FROM carts WHERE user_id=?");
 	    	pstmt.setInt(1, user_id);
 	    	pstmt.executeQuery();
@@ -13,8 +18,13 @@ import java.util.ArrayList;
 		
 		
 		public static boolean updateBalance(int user_id, double balance, double total) throws SQLException { //Cameron Davis, CheckoutServlet
+		    try {
+				Class.forName("com.mysql.cj.jdbc.Driver");
+			} catch (ClassNotFoundException e1) {
+				e1.printStackTrace();
+			}
 			balance = balance - total;
-			Connection conn = DriverManager.getConnection("jdbc:mysql://placeholder", "root", "password");
+			Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/TrojanOrdering", "root", "wasdwasd");
 	    	PreparedStatement stmt = conn.prepareStatement("UPDATE users SET balance = ? WHERE user_id = ?");
 	    	stmt.setDouble(1, balance);
 	    	stmt.setInt(2, user_id);
@@ -28,7 +38,12 @@ import java.util.ArrayList;
 		}
 		
 		public static void deleteCartItems(int user_id, String itemName) throws SQLException { //Cameron Davis, CheckoutServlet
-			Connection conn = DriverManager.getConnection("jdbc:mysql://placeholder", "root", "password");
+		    try {
+				Class.forName("com.mysql.cj.jdbc.Driver");
+			} catch (ClassNotFoundException e1) {
+				e1.printStackTrace();
+			}
+			Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/TrojanOrdering", "root", "wasdwasd");
 			PreparedStatement stmt = conn.prepareStatement("DELETE FROM carts WHERE user_id = ? AND item_id = (SELECT item_id FROM items WHERE item_name = ?)");
 			stmt.setInt(1, user_id);
 	    	stmt.setString(2, itemName);
@@ -37,11 +52,16 @@ import java.util.ArrayList;
 		}
 		
 		public static ArrayList<Integer> getCartItems(int user_id) throws SQLException{ //Cameron Davis, CheckoutServlet
+		    try {
+				Class.forName("com.mysql.cj.jdbc.Driver");
+			} catch (ClassNotFoundException e1) {
+				e1.printStackTrace();
+			}
 			ArrayList<Integer> result = new ArrayList<Integer>();
 			int number = 0;
 			
-			Connection conn = DriverManager.getConnection("jdbc:mysql://placeholder", "root", "password");
-			PreparedStatement stmt = conn.prepareStatement("SELECT * FROM carts WHERE userID=?");
+			Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/TrojanOrdering", "root", "wasdwasd");
+			PreparedStatement stmt = conn.prepareStatement("SELECT * FROM carts WHERE user_id=?");
 			stmt.setInt(1, user_id);
 			ResultSet rs = null;
 			rs = stmt.executeQuery();
@@ -54,32 +74,39 @@ import java.util.ArrayList;
 			return result;
 		}
 		
-		public static String getItemData(ArrayList<Integer> numbers) throws SQLException { //Cameron Davis, CheckoutServlet
-			String result = "";
-			Connection conn = DriverManager.getConnection("jdbc:mysql://placeholder", "root", "password");
-			
-			for(int i = 0; i < numbers.size(); i++) {
-				PreparedStatement stmt = conn.prepareStatement("SELECT * FROM items WHERE itemID=?");
-				stmt.setInt(1, numbers.get(i));
-				ResultSet rs = null;
-				rs = stmt.executeQuery();
-				
-				rs.first();
-				String name = rs.getString("name");
-				double price = rs.getDouble("price");
-				String desc = rs.getString("description");
-				
-				result += "{\"name\":" + "\"" + name + "\",";
-				result += "\"description\":" + "\"" + desc + "\",";
-				result += "\"price\":" +  price + "}";
-				if(i != numbers.size()-1) {
-					result += ",";
-				}
-				
-				stmt.close();
-				rs.close();
-			}
-			return result;
+		public static String getItemData(ArrayList<Integer> numbers) throws SQLException {
+		    try {
+		        Class.forName("com.mysql.cj.jdbc.Driver");
+		    } catch (ClassNotFoundException e1) {
+		        e1.printStackTrace();
+		    }
+		    String result = "";
+		    Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/TrojanOrdering", "root", "wasdwasd");
+
+		    for(int i = 0; i < numbers.size(); i++) {
+		        PreparedStatement stmt = conn.prepareStatement("SELECT * FROM items WHERE item_id=?", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+		        stmt.setInt(1, numbers.get(i));
+		        ResultSet rs = null;
+		        rs = stmt.executeQuery();
+
+		        rs.first();
+		        String name = rs.getString("name");
+		        double price = rs.getDouble("price");
+		        String desc = rs.getString("description");
+
+		        result += "{\"name\":" + "\"" + name + "\",";
+		        result += "\"description\":" + "\"" + desc + "\",";
+		        result += "\"price\":" +  price + "}";
+		        if(i != numbers.size()-1) {
+		            result += ",";
+		        }
+
+		        stmt.close();
+		        rs.close();
+		        System.out.println("hi");
+		    }
+		    System.out.println(result);
+		    return result;
 		}
 
 		public static boolean insertRegistration(String username, String password, String email, double balance) { //example by mitch not used
@@ -94,7 +121,7 @@ import java.util.ArrayList;
 		    ResultSet rs = null;
 		    try {
 		    	
-		        conn = DriverManager.getConnection("jdbc:mysql://placeholder", "root", "password");
+		        conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/TrojanOrdering", "root", "wasdwasd");
 
 		        // check if a row with the same username or email already exists
 		        String checkSql = "SELECT * FROM users WHERE username = ? OR email = ?";
@@ -144,7 +171,7 @@ import java.util.ArrayList;
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-	        Connection conn = DriverManager.getConnection("jdbc:mysql://placeholder", "root", "password");
+	        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/TrojanOrdering", "root", "wasdwasd");
 	        ResultSet rs = null;
 	        boolean isValid = false;
 	        PreparedStatement stmt = conn.prepareStatement("SELECT * FROM users WHERE username=? AND password=?");
@@ -309,7 +336,7 @@ import java.util.ArrayList;
 		}
 		
 		public static void addCartItem(int user_id, int item_id) throws SQLException { //Zack Mazaheri MenuServlet/Itemservlet
-		    Connection conn = DriverManager.getConnection("jdbc:mysql://placeholder", "root", "password");
+		    Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/TrojanOrdering", "root", "wasdwasd");
 
 		    String insertSql = "INSERT INTO carts (user_id, item_id) VALUES (?, ?)";
 		    PreparedStatement stmt = conn.prepareStatement(insertSql);
@@ -321,7 +348,7 @@ import java.util.ArrayList;
 		public static String getRestaurantItems(int restaurant_id) throws SQLException //Zack Mazaheri MenuServlet/ItemServlet
 		{
 			String result = "";
-			Connection conn = DriverManager.getConnection("jdbc:mysql://placeholder", "root", "password");
+			Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/TrojanOrdering", "root", "wasdwasd");
 			PreparedStatement stmt = conn.prepareStatement("SELECT * FROM items WHERE restaurant_id=?");
 			stmt.setInt(1, restaurant_id);
 			ResultSet rs = null;
