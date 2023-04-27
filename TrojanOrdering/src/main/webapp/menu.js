@@ -5,10 +5,10 @@ var log;
 $(document).ready(function(){
 console.log();
 $.ajax({
-	  url: "Servlet",
+	  url: "GetRest",
 	  type: "GET",
 	  //data: "{\"a\":\"b\"}",
-	  //dataType:"json",
+	  dataType:"json",
 	  success: function(data) {
 		console.log("fetch good");
 		console.log( data);
@@ -16,7 +16,7 @@ $.ajax({
 			$.ajax({
 			  url: "MenuServlet",
 			  type: "GET",
-			  data: {"restaurant_id":log},
+			  data: {"restaurant_id":log.restID},
 			  dataType: "json",
 			  success: function(data) {
 				console.log("fetch good");
@@ -28,8 +28,8 @@ $.ajax({
 				
 				
 				
-				$("#headName").text("log.name");
-				$("#image").attr("src","log.imgUrl");
+				$("#headName").text(log.restName);
+				$("#image").attr("src",log.restUrl);
 				var key = 0;
 				for(key in dat){
 					$("#div1").append("<form><table><tbody><tr><th><label id=\"name\">"+dat[key].name+"</label></th><th><label id=\"price\">$"+dat[key].price.toFixed(2)+"</label></th><th><div class=\"box\"><a id=\""+key+"\" class=\"button\" href=\"#popup1\" onclick=\"ffunc(this)\">Add to Order</a></div></th></tr></tbody></table></form><br></div>");
@@ -64,8 +64,8 @@ $("#fg").on("submit", function(event){
 		
 		//var ap = {"quantity":pp};
 		var ji = {"itemID":ij};//userID NEEEEEEEEEEEEEED
-		var aa = {"userID":"log.userID"}//////////////////////////////neeeeeeeeeed
-		$.extend(at,ap);
+		var aa = {"userID":log.userID}//////////////////////////////neeeeeeeeeed
+		//$.extend(at,ap);
 		$.extend(at,ji);
 		$.extend(at,aa);
 		console.log(at);

@@ -26,7 +26,7 @@ public class GetRest extends HttpServlet {
 				String result = "{\"restID\":" + "\"" + restID + "\",";
 				result += "\"restName\":" + "\"" + restName + "\",";
 				result += "\"restUrl\":" + "\"" + restUrl + "\",";
-				result += "\"userID\":" +  userID + "}";
+				result += "\"userID\":" + "\"" + userID + "\"}";
 
 
 

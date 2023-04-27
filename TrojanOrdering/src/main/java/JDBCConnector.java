@@ -389,12 +389,12 @@ import java.util.ArrayList;
 				double price = rs.getDouble("price");
 				String desc = rs.getString("description");
 				String imgUrl = rs.getString("imgUrl");
-				String itemID = rs.getString("itemID");
+				double itemID = rs.getDouble("itemID");
 				
 				result += "{\"name\":" + "\"" + name + "\",";
 				result += "\"description\":" + "\"" + desc + "\",";
 				result += "\"imgUrl\":" + "\"" + imgUrl + "\",";
-				result += "\"price\":" +  price + "}";
+				result += "\"price\":" +  price + ",";
 				result += "\"itemID\":" +  itemID + "}";
 				result += ',';
 			}
