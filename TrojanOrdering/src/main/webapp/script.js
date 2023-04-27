@@ -29,6 +29,24 @@ function getUserInfo() {
   });
 }
 
+function getCart(id){
+  return new Promise(function(resolve, reject) {
+    $.ajax({
+      url: '/TrojanOrdering/checkout?userID='+String(id),
+      type: 'GET',
+      //dataType: 'text',
+      success: function(response) {
+        resolve(response);
+      },
+      
+      error: function(xhr, status, error) {
+        console.log('Error:', error);
+        reject(error);
+      }
+    });
+  });
+}
+
 $(function() {
   var userID;
   var i = 0;
@@ -37,11 +55,10 @@ $(function() {
     userID = jsonArray.data[0].id;
     balance = jsonArray.data[0].balance;
     var url = '/TrojanOrdering/checkout?userID=' + String(userID);
-    fetch(url)
-    .then(response => response.json())
-    .then(response => {
+    getCart(userID).then(function(response) {
+      console.log(response)
       const data = response.data; //by reassigning the json to a new data vay, it should be an array by default which works with the foreach function
-      data.forEach(item => { 
+      data.forEach(item => {
       const cartItemTemp = new cartItem(item.name, item.price, 1);
       var itemExists = false;
       items.forEach(existingItem => {
