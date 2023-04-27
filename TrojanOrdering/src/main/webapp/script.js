@@ -10,33 +10,36 @@ class cartItem {
     this.total = price * quantity;
   }
 }
-function getUserInfo(url, successCallback) {
-    var userID, balance;
+
+function getUserInfo() {
+  return new Promise(function(resolve, reject) {
     $.ajax({
-      url: url,
-      type: 'GET',
-      dataType: 'text',
-      success: function(data) {
-          var lines  = data.split('\n');
-          userID = lines[0];
-          balance = lines[1];
-          successCallback(userID, balance);
-      },
-      error: function(xhr, status, error) {
+        url: '/TrojanOrdering/user_id',
+        type: 'GET',
+        //dataType: 'text',
+        success: function(response) {
+          resolve(response);
+        },
+        
+        error: function(xhr, status, error) {
           console.log('Error:', error);
-      }
+          reject(error);
+        }
     });
-  }
+  });
+}
+
 $(function() {
-  //var jsonData = [
-  //var userID = document.getElementById("user_id").value;
+  var userID;
   var i = 0;
   const items = [];
- getUserInfo('/TrojanOrdering/user_id', function(userID, balance) {
-    fetch('/TrojanOrdering/checkout?userID=1')
+  getUserInfo().then(function(jsonArray) {
+    userID = jsonArray.data[0].id;
+    balance = jsonArray.data[0].balance;
+    var url = '/TrojanOrdering/checkout?userID=' + String(userID);
+    fetch(url)
     .then(response => response.json())
     .then(response => {
-		console.log("test")
       const data = response.data; //by reassigning the json to a new data vay, it should be an array by default which works with the foreach function
       data.forEach(item => { 
       const cartItemTemp = new cartItem(item.name, item.price, 1);
@@ -48,7 +51,7 @@ $(function() {
         }
       });
       if (!itemExists) {
-		console.log(cartItemTemp.name);
+		    console.log(cartItemTemp.name);
         items.push(cartItemTemp);
         console.log("Number of items in the cart: " + items.length);
       }

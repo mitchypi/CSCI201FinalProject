@@ -20,15 +20,16 @@ public class UserIDServlet extends HttpServlet {
 	    int user_id = (int) session.getAttribute("user_id");
 	    double balance = (double) session.getAttribute("balance");
 
-	    String user_id_str = Integer.toString(user_id);
+	    //String user_id_str = Integer.toString(user_id);
+		String json = "{\"data\":[{\"id\":" + user_id + ", \"balance\":" + balance + "}]}";
 	    
 	    // Set the content type of the response
-	    response.setContentType("text/plain");
+	    response.setContentType("application/json");
 
 	    // Write the user_id to the response output stream
 	    PrintWriter out = response.getWriter();
-	    out.println(user_id);
-	    out.println(balance);
+	    out.println(json);
+	    //out.println(balance);
         out.flush();
         out.close();
 	}
