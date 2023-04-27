@@ -347,7 +347,7 @@ import java.util.ArrayList;
 		
 		public static String getRestaurantItems(int restaurant_id) throws SQLException //Zack Mazaheri MenuServlet/ItemServlet
 		{
-			String result = "";
+			String result = "[";
 			Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/TrojanOrdering", "root", "wasdwasd");
 			PreparedStatement stmt = conn.prepareStatement("SELECT * FROM items WHERE restaurant_id=?");
 			stmt.setInt(1, restaurant_id);
@@ -367,6 +367,7 @@ import java.util.ArrayList;
 				result += ',';
 			}
 			result = result.substring(0, result.length()-1);
+			result += "]";
 			
 			stmt.close();
 			rs.close();

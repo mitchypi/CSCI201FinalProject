@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/MenuServlet")
 public class MenuServlet extends HttpServlet {
 
+	private static final long serialVersionUID = 1L;
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -23,6 +25,7 @@ public class MenuServlet extends HttpServlet {
 			json = JDBCConnector.getRestaurantItems(restaurant_id);
 			System.out.println(json);
 		    response.setContentType("application/json");
+			response.setCharacterEncoding("UTF-8");
 		    out.println(json);
 		    out.flush();
 		    out.close();

@@ -10,6 +10,9 @@ import javax.servlet.http.HttpSession;
 
 @WebServlet("/GetRest")
 public class GetRest extends HttpServlet {
+
+	  private static final long serialVersionUID = 1L;
+	  
 	  public void doGet(HttpServletRequest request, HttpServletResponse response)
 			    throws ServletException, IOException {
 			    // get the restaurant id from the request parameter
