@@ -56,7 +56,7 @@ public class HomeServlet extends HttpServlet {
             }
             count++;
         }
-        html += email;
+        //html += email;
         return html;
     }
 }
