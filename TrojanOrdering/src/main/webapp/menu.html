@@ -12,95 +12,48 @@
 
 <script src="menu.js"></script>
 
-<!-- This html is supposed to be the destination from the restaurant clicked in the home page, so I guess it is homeServlet should grab data and compose this page -->
-<!-- Here is just a sample static menu-->
 
 </head>
 <body>
-	
-	  <div class="nav">
-		<ul>
-		  <li><a href="login.html">LOGIN</a></li>
-		  <li><a href="home.html">HOME</a></li>
-		  <li><a href="restuarants.html">RESTAURANTS</a></li>
-		  <li><a href="checkout.html">CHECKOUT</a></li>
-		</ul>
-	  </div>
 
-	  <h1>TrojanOrdering</h1>
-	
-	<br />
-	<br />
 
-<div id="add">
+  
+    <div class="nav">
+      <ul>
+        <li><a href="login.html">LOGIN</a></li>
+        <li><a href="home.html">HOME</a></li>
+        <li><a href="restuarants.html">RESTAURANTS</a></li>
+        <li><a href="checkout.html">CHECKOUT</a></li>
+      </ul>
+    </div>
+    
+    <h1>TrojanOrdering</h1>
+  
+  <br />
+  <br />
+	<div id="add"></div>
 	<div id="div1">
-		<label id="headName">In-N-Out</label><br>
-		<div id="ii"></div>
-		<!--  Image here is just a sample  -->
-		<img id="image" src="https://media.istockphoto.com/id/1457889029/photo/group-of-food-with-high-content-of-dietary-fiber-arranged-side-by-side.jpg?s=1024x1024&w=is&k=20&c=96MkVCuqUWOcMZ7vO5nG41rPufiSWlayTac_nsxXUTw="></img><br>
-		<form id="form1">
-			<table>
-			<tbody>
-			<tr>
-			<th><label id="name">Double-Double</label></th>
-			<th><label id="price">$3.95</label></th>
-			<th>
-			<div class="box">
-			<a class="button" href="#popup1">Add to Order</a>
-			</div>
-			</th>
-			</tr>
-			</tbody>
-			</table>
-		</form><br>
-		<form id="form2">
-			<table>
-			<tbody>
-			<tr>
-			<th><label id="name">Cheeseburger</label></th>
-			<th><label id="price">$2.80</label></th>
-			<th>
-			<div class="box">
-			<a class="button" href="#popup1">Add to Order</a>
-			</div>
-			</th>
-			</tr>
-			</tbody>
-			</table>
-		</form><br>
-		<form id="form3">
-			<table>
-			<tbody>
-			<tr>
-			<th><label id="name">French-Fries</label></th>
-			<th><label id="price">$1.85</label></th>
-			<th>
-			<div class="box">
-			<a class="button" href="#popup1">Add to Order</a>
-			</div>
-			</th>
-			</tr>
-			</tbody>
-			</table>
-		</form><br>
-		</div>
-		
-		
-		<div id="popup1" class="overlay">
-			<div class="popup">
-				<a class="close" href="#">&times;</a>
-				<div class="content">
-				  <form>
-					
-					<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Imgur_logo.svg/1920px-Imgur_logo.svg.png" id="nima"><br><br>
-					<h2 for="it">Double-Double</h2><br>
-					<lable for="quantity">Quantity:</lable>
-					<input type="text" name="quantity" id="quantity"><br><br>
-					<input type="submit" value="Add to Order" id="button"><br>
-				  </form>
-				</div>
+	<label id="headName"></label><br><div id="ii"></div>
+	<img id="image" src="https://media.istockphoto.com/id/1457889029/photo/group-of-food-with-high-content-of-dietary-fiber-arranged-side-by-side.jpg?s=1024x1024&w=is&k=20&c=96MkVCuqUWOcMZ7vO5nG41rPufiSWlayTac_nsxXUTw="></img>
+	<br>
+
+	
+	<div id="popup1" class="overlay">
+		<div class="popup">
+			<a class="close" href="#">&times;</a>
+			<div class="content">
+		      <form id="fg" class="pig">
+		        
+		        <img src="" id="nima"><br><br>
+		        <h2 id="menuName" for="it">Double-Double</h2><br>
+
+		        <input type="submit" value="Add to Order" id="button"><br>
+		      </form>
 			</div>
 		</div>
-		
+	</div>
+	
+	<div id="info" class="ji"></div>
+	
 </body>
 </html>
