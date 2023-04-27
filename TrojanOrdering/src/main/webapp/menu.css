@@ -3,13 +3,15 @@
 #name{
 	display: inline;
 	float: left;
-	margin-left: 32%;
+	margin-left: 28%;
 	width: 120px;
+	font-size:18px;
 }
 
 #price{
 	display: inline;
 	float: center;
+	font-size:20px;
 }
 
 table{
@@ -33,7 +35,9 @@ table{
 
 #headName{
 	padding: 30px;
-	font-size: 20px;
+	font-size: 25px;
+	font-weight: bold;
+	text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 #div1{
@@ -100,7 +104,9 @@ h1 {
   background-color: #3393cc;
   text-decoration: none;
   width:80px;
-  height:7px;
+  height:16px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+
 }
 
 
@@ -159,7 +165,13 @@ h1 {
 }
 
 #nima{
-  max-height:100px;
+	max-height:200px;
+
+}
+
+img{
+
+	margin:0;
 }
 
 #quantity{
