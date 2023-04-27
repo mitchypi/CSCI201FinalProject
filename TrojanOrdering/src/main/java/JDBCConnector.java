@@ -233,6 +233,36 @@ import java.util.ArrayList;
 			return restaurants;
 
 		}
+
+		public static Restaurant getRestData(int restaurant_id)
+		{
+			Restaurant rest = null;
+			try {
+				Class.forName("com.mysql.cj.jdbc.Driver");
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			}
+			Connection conn = null;
+		    PreparedStatement pstmt = null;
+		    ResultSet rs = null;
+			try{
+				conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/TrojanOrdering", "root", "wasdwasd");
+				String sql = "SELECT * FROM Restaurants WHERE restaurant_id = ?";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, restaurant_id);
+				rs = pstmt.executeQuery();
+				while(rs.next()){
+					rest = new Restaurant(rs.getInt("restaurant_id"), rs.getString("name"), rs.getString("address"), rs.getString("imgurl"));
+				}
+				
+				
+			}
+			catch (SQLException sqle) {
+		        System.out.println("SQLException in getRestData");
+			}
+			return rest;
+
+		}
 		public static int registerUser(String password, String email, double balance) throws SQLException { //Chetan Bagri, RegisterServlet
 		    int userID = -3;
 		    try {
