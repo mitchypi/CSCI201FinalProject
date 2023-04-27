@@ -19,8 +19,20 @@ public class GetRest extends HttpServlet {
 		  		PrintWriter out = response.getWriter();
 			    HttpSession session = request.getSession();
 			    String restID = (String) session.getAttribute("restaurant_id");
-			    response.setContentType("text/plain");
-			    out.println(restID);
+				String restName = (String) session.getAttribute("restaurant_name");
+				String userID = (String) session.getAttribute("user_id");
+				String restUrl = (String) session.getAttribute("restaurant_img");
+
+				String result = "{\"restID\":" + "\"" + restID + "\",";
+				result += "\"restName\":" + "\"" + restName + "\",";
+				result += "\"restUrl\":" + "\"" + restUrl + "\",";
+				result += "\"userID\":" +  userID + "}";
+
+
+
+			    response.setContentType("application/json");
+	        	response.setCharacterEncoding("UTF-8");
+			    out.println(result);
 			    out.flush();
 			    out.close();
 			    
