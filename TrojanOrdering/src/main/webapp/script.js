@@ -57,7 +57,9 @@ $(function() {
     var url = '/TrojanOrdering/checkout?userID=' + String(userID);
     getCart(userID).then(function(response) {
       console.log(response)
-      const data = response.data; //by reassigning the json to a new data vay, it should be an array by default which works with the foreach function
+      const data = JSON.parse(response).data; //by reassigning the json to a new data vay, it should be an array by default which works with the foreach function
+      console.log(response.data)
+      console.log(data)
       data.forEach(item => {
       const cartItemTemp = new cartItem(item.name, item.price, 1);
       var itemExists = false;
@@ -115,6 +117,7 @@ $(function() {
     // }
   ;
   var html = "<tbody>";
+  $(function() {
   $.each(items, function() {
 	console.log("each item");
 	console.log(this.name);
@@ -146,6 +149,7 @@ $(function() {
       "      </tr>";
   //]
   });
+ });
   html += "</tbody>";
   $(".shopping-cart").append(html);
   recalculateCart();
