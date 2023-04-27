@@ -67,6 +67,7 @@ $(function() {
         if (existingItem.name == cartItemTemp.name) {
           itemExists = true;
           existingItem.quantity++;
+          console.log("Number of items in the cart: " + items.length);
         }
       });
       if (!itemExists) {
@@ -75,49 +76,8 @@ $(function() {
         console.log("Number of items in the cart: " + items.length);
       }
     });
-  })
-  .catch(error => console.error(error));
-    // do something with userID and balance
-  });
-    // {
-    //   name: "Item 1",
-    //   price: 38,
-    //   quantity: 1,
-    //   total: 38
-    // },
-    // {
-    //   name: "Item 2",
-    //   price: 23.5,
-    //   quantity: 1,
-    //   total: 23.5
-    // },
-    // {
-    //   name: "Item 3",
-    //   price: 100,
-    //   quantity: 1,
-    //   total: 100
-    // },
-    // {
-    //   name: "Item 4",
-    //   price: 45,
-    //   quantity: 1,
-    //   total: 45
-    // },
-    // {
-    //   name: "Item 5",
-    //   price: 66,
-    //   quantity: 1,
-    //   total: 66
-    // },
-    // {
-    //   name: "Item 6",
-    //   price: 199,
-    //   quantity: 1,
-    //   total: 199
-    // }
-  ;
-  var html = "<tbody>";
-  $(function() {
+    var html = "<tbody>";
+  
   $.each(items, function() {
 	console.log("each item");
 	console.log(this.name);
@@ -149,7 +109,6 @@ $(function() {
       "      </tr>";
   //]
   });
- });
   html += "</tbody>";
   $(".shopping-cart").append(html);
   recalculateCart();
@@ -193,6 +152,48 @@ $(function() {
     recalculateCart();
   });
 });
+  })
+  .catch(error => console.error(error));
+    // do something with userID and balance
+  });
+    // {
+    //   name: "Item 1",
+    //   price: 38,
+    //   quantity: 1,
+    //   total: 38
+    // },
+    // {
+    //   name: "Item 2",
+    //   price: 23.5,
+    //   quantity: 1,
+    //   total: 23.5
+    // },
+    // {
+    //   name: "Item 3",
+    //   price: 100,
+    //   quantity: 1,
+    //   total: 100
+    // },
+    // {
+    //   name: "Item 4",
+    //   price: 45,
+    //   quantity: 1,
+    //   total: 45
+    // },
+    // {
+    //   name: "Item 5",
+    //   price: 66,
+    //   quantity: 1,
+    //   total: 66
+    // },
+    // {
+    //   name: "Item 6",
+    //   price: 199,
+    //   quantity: 1,
+    //   total: 199
+    // }
+  ;
+  
 function recalculateCart() {
   var subTotal = 0;
   var grandTotal = 0;

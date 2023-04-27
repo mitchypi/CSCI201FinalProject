@@ -377,6 +377,12 @@ import java.util.ArrayList;
 		
 		public static String getRestaurantItems(int restaurant_id) throws SQLException //Zack Mazaheri MenuServlet/ItemServlet
 		{
+		    try {
+					Class.forName("com.mysql.cj.jdbc.Driver");
+				} catch (ClassNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			String result = "[";
 			Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/TrojanOrdering", "root", "wasdwasd");
 			PreparedStatement stmt = conn.prepareStatement("SELECT * FROM items WHERE restaurant_id=?");
@@ -389,7 +395,7 @@ import java.util.ArrayList;
 				double price = rs.getDouble("price");
 				String desc = rs.getString("description");
 				String imgUrl = rs.getString("imgUrl");
-				double itemID = rs.getDouble("itemID");
+				double itemID = rs.getDouble("item_id");
 				
 				result += "{\"name\":" + "\"" + name + "\",";
 				result += "\"description\":" + "\"" + desc + "\",";

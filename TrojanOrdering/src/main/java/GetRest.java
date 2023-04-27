@@ -20,7 +20,7 @@ public class GetRest extends HttpServlet {
 			    HttpSession session = request.getSession();
 			    String restID = (String) session.getAttribute("restaurant_id");
 				String restName = (String) session.getAttribute("restaurant_name");
-				String userID = (String) session.getAttribute("user_id");
+				String userID = session.getAttribute("user_id").toString();
 				String restUrl = (String) session.getAttribute("restaurant_img");
 
 				String result = "{\"restID\":" + "\"" + restID + "\",";
