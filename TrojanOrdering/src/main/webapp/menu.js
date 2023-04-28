@@ -89,6 +89,8 @@ $("#fg").on("submit", function(event){
 				console.log("failed");
 				console.log(data);
 					//window.location.replace("index.html");
+				alert("Added 1 "+at.name+" to cart");
+	    		window.location.replace("menu.html");
 			}
 	   });
   });
