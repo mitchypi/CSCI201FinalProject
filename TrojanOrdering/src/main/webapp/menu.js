@@ -78,6 +78,8 @@ $("#fg").on("submit", function(event){
 			{
 				console.log("success");
 				console.log(data);//can be random message
+				alert("Added 1 "+at.name+" to cart");
+	    		window.location.replace("menu.html");
 
 
 					//window.location.replace("index.html");
